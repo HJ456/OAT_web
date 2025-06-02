@@ -25,6 +25,7 @@
     --font-primary: 'Poppins', sans-serif;
     --font-secondary: 'Inter', sans-serif;
     --transition-speed: 0.3s;
+    --accent-light-blue-rgb: 125, 211, 252;
 }
 
 html {
@@ -45,6 +46,7 @@ body {
 /* Custom Scrollbar (optional, for webkit browsers) */
 body::-webkit-scrollbar {
     width: 8px;
+    border: 2px solid var(--bg-dark-primary);
 }
 body::-webkit-scrollbar-track {
     background: var(--bg-dark-primary);
@@ -145,6 +147,20 @@ button:hover ~ #cursor-dot,
 }
 
 /* --------------------
+   Scroll Progress Bar
+   -------------------- */
+#scroll-progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 4px;
+    background-color: var(--accent-cyan);
+    width: 0%; /* 초기 너비는 0, JS로 업데이트 */
+    z-index: 101; /* 헤더(100) 위에 표시 */
+    transition: width 0.1s ease-out; /* 부드러운 너비 변경 효과 (선택적) */
+}
+
+/* --------------------
    Header
    -------------------- */
 header {
@@ -222,6 +238,7 @@ header ul.nav-links li a.nav-link::after {
 header ul.nav-links li a.nav-link:hover,
 header ul.nav-links li a.nav-link.active {
     color: var(--accent-cyan);
+    transform: translateY(-2px); /* 마이크로 인터랙션: 살짝 위로 이동 */
 }
 
 header ul.nav-links li a.nav-link:hover::after,
@@ -300,9 +317,15 @@ header ul.nav-links li a.nav-link.active::after {
 }
 
 .cta-button:hover {
-    background-color: rgba(100, 255, 218, 0.1); /* Cyan 투명 배경 */
-    transform: translateY(-3px);
-    box-shadow: 0 4px 15px rgba(100, 255, 218, 0.2);
+    background-color: var(--accent-light-blue);
+    color: var(--bg-dark-primary);
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 8px 15px rgba(var(--accent-light-blue-rgb, 125, 211, 252), 0.3);
+}
+
+.cta-button:active { /* 클릭 시 효과 */
+    transform: translateY(-1px) scale(1.02);
+    box-shadow: 0 4px 10px rgba(var(--accent-light-blue-rgb, 125, 211, 252), 0.2);
 }
 
 /* --------------------
@@ -813,4 +836,162 @@ footer p:first-child {
     .contact-form {
         padding: 20px;
     }
+}
+
+/* --------------------
+   Particles.js Background
+   -------------------- */
+#particles-js {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: -1; /* 다른 콘텐츠 뒤에 위치 */
+    background-color: var(--bg-dark-primary); /* particles.js 로드 전 배경색 */
+} 
+
+/* --------------------
+   Portfolio Modal Styles
+   -------------------- */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex; /* flex를 사용하여 중앙 정렬 */
+    align-items: center;
+    justify-content: center;
+    z-index: 1000; /* 최상단에 위치 */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-content {
+    background-color: var(--light-navy);
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+    width: 90%;
+    max-width: 700px; /* 모달 최대 너비 */
+    max-height: 90vh; /* 모달 최대 높이, 화면 넘어가지 않도록 */
+    overflow-y: auto; /* 내용 많을 시 스크롤 */
+    position: relative;
+    transform: scale(0.95);
+    transition: transform 0.3s ease;
+}
+
+.modal-overlay.active .modal-content {
+    transform: scale(1);
+}
+
+.modal-close-button {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: none;
+    border: none;
+    color: var(--text-light-secondary);
+    font-size: 1.8rem;
+    cursor: pointer;
+    transition: color var(--transition-speed) ease;
+}
+
+.modal-close-button:hover {
+    color: var(--accent-cyan);
+}
+
+#modal-img {
+    width: 100%;
+    max-height: 350px; /* 이미지 최대 높이 제한 */
+    object-fit: cover; /* 이미지 비율 유지하며 채우기 */
+    border-radius: 6px;
+    margin-bottom: 20px;
+}
+
+#modal-title {
+    font-family: var(--font-primary);
+    color: var(--accent-cyan);
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+}
+
+#modal-description {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    margin-bottom: 20px;
+    color: var(--text-light-secondary);
+}
+
+#modal-description p {
+    margin-bottom: 10px;
+}
+
+.modal-content h4 {
+    font-family: var(--font-primary);
+    color: var(--text-light-primary);
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+    border-top: 1px solid var(--lightest-navy);
+    padding-top: 20px;
+}
+
+#modal-details-list {
+    list-style: none;
+    padding-left: 0;
+    font-size: 0.9rem;
+    color: var(--text-light-secondary);
+}
+
+#modal-details-list li {
+    margin-bottom: 8px;
+    padding-left: 18px;
+    position: relative;
+}
+
+#modal-details-list li::before {
+    content: '\f058'; /* Font Awesome check-circle 아이콘 */
+    font-family: 'Font Awesome 5 Free'; /* Font Awesome 6 Free는 6.x 버전 */
+    font-weight: 900; /* Solid 아이콘 사용 */
+    color: var(--accent-cyan);
+    position: absolute;
+    left: 0;
+    top: 2px;
+}
+
+/* 모달 반응형 */
+@media (max-width: 768px) {
+    .modal-content {
+        padding: 20px;
+        max-height: 85vh;
+    }
+    #modal-title {
+        font-size: 1.5rem;
+    }
+    #modal-img {
+        max-height: 250px;
+    }
+} 
+
+/* --------------------
+   Micro-interaction & Easter Egg Styles
+   -------------------- */
+.cta-particle {
+    position: fixed; /* body를 기준으로 위치 잡기 위해 fixed 사용 */
+    width: 8px;
+    height: 8px;
+    background-color: var(--accent-cyan);
+    border-radius: 50%;
+    pointer-events: none; /* 파티클이 클릭 등의 이벤트를 가로채지 않도록 */
+    z-index: 9998; /* 커서보다는 아래, 다른 일반 콘텐츠보다는 위에 오도록 */
+    opacity: 1; /* 초기 opacity, GSAP에서 제어 */
+    /* transform 속성은 GSAP에서 직접 제어 */
 } 
