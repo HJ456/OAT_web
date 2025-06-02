@@ -3,14 +3,225 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8" />
-  <title>내 웹페이지</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OAT - 모든 전기차의 안전을 추구하는 회사</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-  <h1>안녕하세요!</h1>
-  <p>이건 내 컴퓨터에서 테스트 중인 웹페이지예요.</p>
-  <button onclick="sayHi()">클릭해보세요</button>
+  <div id="cursor-dot"></div>
+  <div id="cursor-outline"></div>
 
-  <script src="script.js"></script>
+  <header>
+    <nav class="container">
+      <div class="logo">OAT</div>
+      <ul class="nav-links">
+        <li><a href="#about" class="nav-link">회사소개</a></li>
+        <li><a href="#services" class="nav-link">솔루션</a></li>
+        <li><a href="#portfolio" class="nav-link">포트폴리오</a></li>
+        <li><a href="#team" class="nav-link">팀 소개</a></li>
+        <li><a href="#contact" class="nav-link">문의하기</a></li>
+      </ul>
+      <button class="menu-toggle" id="menu-toggle" aria-label="메뉴 열기/닫기">
+        <i class="fas fa-bars"></i>
+      </button>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="hero">
+      <div class="container hero-content">
+        <h1 id="hero-title-line1">혁신을 설계하는,</h1>
+        <h1 id="hero-title-line2">OAT와 함께</h1>
+        <p id="hero-subtitle">안전을 완성합니다.</p>
+        <a href="#services" class="cta-button" id="hero-cta">BFTC 솔루션 자세히 보기</a>
+      </div>
+    </section>
+
+    <section id="about" class="about-section content-section">
+      <div class="container">
+        <h2 class="section-title" data-aos="fade-up">About OAT</h2>
+        <div class="about-content">
+          <div class="about-text" data-aos="fade-right" data-aos-delay="200">
+            <h3>우리의 미션</h3>
+            <p>OAT는 전기차 화재로부터 사람과 미래를 지킵니다. 혁신적인 기술력으로 위험을 통제하고, 현실을 바꾸는 솔루션을 제공합니다.</p>
+            <h3>우리의 비전</h3>
+            <p>'불가능'을 가능하게 만드는 기술, 우리는 열폭주를 멈추는 새로운 기준을 만들고, 글로벌 모빌리티 산업의 변화를 주도합니다.</p>
+          </div>
+          <div class="about-image" data-aos="fade-left" data-aos-delay="400">
+            <img src="images/about.png" alt="회사 소개 이미지">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="services" class="services-section content-section">
+      <div class="container">
+        <h2 class="section-title" data-aos="fade-up">Our Solutions</h2>
+        <div class="services-grid">
+          <div class="service-card" data-aos="fade-up" data-aos-delay="100">
+            <div class="service-icon"><img src="images/web.png" alt="서비스 아이콘1"></div>
+            <h3>혁신적인 BFTC</h3>
+            <p>기존의 패러다임을 바꾼 DBFC는 화재 발생 즉시 열폭주를 차단하고 2분 내 초기 진압을 실현합니다. 인명 피해 없이, 응급 소방 조치 없이, 배터리까지 재사용 가능한 차세대 진압 기술입니다.</p>
+          </div>
+          <div class="service-card" data-aos="fade-up" data-aos-delay="200">
+            <div class="service-icon"><img src="images/web.png" alt="서비스 아이콘2"></div>
+            <h3>뛰어난 BFTC</h3>
+            <p>BFTC는 화재를 감지하자마자 즉시 반응해 열폭주를 차단하고, 시스템 스스로 진압을 완료합니다. 뛰어난 통합 제어와 자가 소화 기술로, 전기차 화재를 최소한의 시간과 피해로 해결합니다.</p>
+          </div>
+          <div class="service-card" data-aos="fade-up" data-aos-delay="300">
+            <div class="service-icon"><img src="images/web.png" alt="서비스 아이콘3"></div>
+            <h3>미래를 선도하는 BFTC</h3>
+            <p>alfofmf tjsehgksms BFTC는 기존 소화 개념을 넘어, 화재를 예측하고 스스로 제어하는 지능형 시스템입니다. 전기차 시대의 안전 기준을 새롭게 정의하는 차세대 화재 대응 기술입니다.</p>
+          </div>
+          <div class="service-card" data-aos="fade-up" data-aos-delay="400">
+            <div class="service-icon"><img src="images/web.png" alt="서비스 아이콘4"></div>
+            <h3>확장 가능한 BFTC</h3>
+            <p>BFTC는 전기차를 넘어 e-모빌리티, 에너지 저장장치(ESS), 물류 로봇 등 다양한 배터리 기반 기기에 적용 가능합니다. 
+              모듈형 구조로 어떤 플랫폼에도 유연하게 통합됩니다.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="portfolio" class="portfolio-section content-section">
+      <div class="container">
+        <h2 class="section-title" data-aos="fade-up">Portfolio</h2>
+        <div class="portfolio-grid">
+          <div class="portfolio-item" data-aos="zoom-in-up">
+            <img src="images/portfolio1.png" alt="프로젝트 알파">
+            <div class="portfolio-info"><h3>프로젝트 알파</h3><p>주행중 화재</p></div>
+          </div>
+          <div class="portfolio-item" data-aos="zoom-in-up" data-aos-delay="150">
+            <img src="images/portfolio2.png" alt="프로젝트 베타">
+            <div class="portfolio-info"><h3>프로젝트 베타</h3><p>충전중 화재</p></div>
+          </div>
+          <div class="portfolio-item" data-aos="zoom-in-up" data-aos-delay="300">
+            <img src="images/portfolio3.png" alt="프로젝트 감마">
+            <div class="portfolio-info"><h3>프로젝트 감마</h3><p>내부 프로세스</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="team" class="team-section content-section">
+      <div class="container">
+        <h2 class="section-title" data-aos="fade-up">Our Team</h2>
+        <div class="team-grid">
+          <div class="team-member-card" data-aos="fade-up" data-aos-delay="100">
+            <div class="team-member-photo">
+              <img src="https://via.placeholder.com/250x250?text=Team+Member+1" alt="팀원 1 사진">
+            </div>
+            <div class="team-member-info">
+              <h3>이름 1</h3>
+              <p class="role">CEO & Founder</p>
+              <p class="bio">기술 혁신을 통해 세상을 변화시키는 것을 목표로 합니다.</p>
+              <div class="social-links">
+                <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+              </div>
+            </div>
+          </div>
+          <div class="team-member-card" data-aos="fade-up" data-aos-delay="200">
+            <div class="team-member-photo">
+              <img src="https://via.placeholder.com/250x250?text=Team+Member+2" alt="팀원 2 사진">
+            </div>
+            <div class="team-member-info">
+              <h3>이름 2</h3>
+              <p class="role">CTO</p>
+              <p class="bio">최고의 기술력으로 사용자에게 가치를 전달합니다.</p>
+              <div class="social-links">
+                <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+              </div>
+            </div>
+          </div>
+          <div class="team-member-card" data-aos="fade-up" data-aos-delay="300">
+            <div class="team-member-photo">
+              <img src="https://via.placeholder.com/250x250?text=Team+Member+3" alt="팀원 3 사진">
+            </div>
+            <div class="team-member-info">
+              <h3>이름 3</h3>
+              <p class="role">Lead Designer</p>
+              <p class="bio">사용자 중심의 아름다운 디자인을 추구합니다.</p>
+              <div class="social-links">
+                <a href="#" aria-label="Dribbble"><i class="fab fa-dribbble"></i></a>
+                <a href="#" aria-label="Behance"><i class="fab fa-behance"></i></a>
+              </div>
+            </div>
+          </div>
+          <!-- 필요에 따라 팀원 카드 추가 -->
+        </div>
+      </div>
+    </section>
+
+    <section id="faq" class="faq-section content-section">
+      <div class="container">
+        <h2 class="section-title" data-aos="fade-up">FAQ</h2>
+        <div class="faq-accordion">
+          <div class="faq-item" data-aos="fade-up" data-aos-delay="100">
+            <button class="faq-question" aria-expanded="false">
+              <span>첫 번째 질문입니다: OAT 솔루션의 주요 특징은 무엇인가요?</span>
+              <i class="fas fa-chevron-down"></i>
+            </button>
+            <div class="faq-answer">
+              <p>OAT 솔루션은 사용자 맞춤형, 최신 기술 기반, 그리고 뛰어난 확장성을 주요 특징으로 합니다. 고객의 비즈니스 성장을 돕기 위해 최선을 다합니다.</p>
+            </div>
+          </div>
+          <div class="faq-item" data-aos="fade-up" data-aos-delay="200">
+            <button class="faq-question" aria-expanded="false">
+              <span>두 번째 질문: 기술 지원은 어떻게 받을 수 있나요?</span>
+              <i class="fas fa-chevron-down"></i>
+            </button>
+            <div class="faq-answer">
+              <p>문의하기 섹션을 통해 연락주시거나, 계약 고객의 경우 전용 지원 채널을 통해 24/7 기술 지원을 받으실 수 있습니다.</p>
+            </div>
+          </div>
+          <div class="faq-item" data-aos="fade-up" data-aos-delay="300">
+            <button class="faq-question" aria-expanded="false">
+              <span>세 번째 질문: 프로젝트 진행 절차는 어떻게 되나요?</span>
+              <i class="fas fa-chevron-down"></i>
+            </button>
+            <div class="faq-answer">
+              <p>요구사항 분석, 맞춤형 설계, 개발 및 테스트, 그리고 최종 배포 및 유지보수 단계를 거칩니다. 각 단계마다 고객과의 긴밀한 소통을 중요하게 생각합니다.</p>
+            </div>
+          </div>
+          <!-- 필요에 따라 FAQ 아이템 추가 -->
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="contact-section content-section">
+      <div class="container">
+        <h2 class="section-title" data-aos="fade-up">Contact Us</h2>
+        <p class="contact-subtitle" data-aos="fade-up" data-aos-delay="100">
+          OAT의 기술과 솔루션에 대해 궁금한 점이 있으신가요? <br>언제든지 편하게 문의해주세요. 최고의 파트너가 되겠습니다.
+        </p>
+        <form class="contact-form" data-aos="fade-up" data-aos-delay="200">
+          <div class="form-group">
+            <input type="text" id="name" name="name" placeholder="성함" required>
+            <input type="email" id="email" name="email" placeholder="이메일 주소" required>
+          </div>
+          <div class="form-group">
+            <input type="text" id="subject" name="subject" placeholder="제목" required>
+          </div>
+          <textarea id="message" name="message" placeholder="문의 내용" rows="5" required></textarea>
+          <button type="submit" class="cta-button">메시지 보내기</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2024 OAT Inc. All Rights Reserved.</p>
+      <p>본 페이지는 데모 목적으로 제작되었습니다.</p>
+    </div>
+  </footer>
+
+  <script src="js/script.js"></script>
 </body>
 </html>
