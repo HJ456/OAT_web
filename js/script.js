@@ -699,6 +699,60 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    function initializeImageViewerModal() {
+        console.log("[Debug] initializeImageViewerModal called.");
+        if (document.body.dataset.imageViewerListenersAttached === 'true') return;
+
+        const imageViewerModal = document.getElementById('image-viewer-modal');
+        if (!imageViewerModal) {
+            console.warn("[Debug] Image viewer modal not found. Cannot initialize.");
+            return;
+        }
+
+        const viewerImage = imageViewerModal.querySelector('.image-viewer-content img');
+        const closeButton = imageViewerModal.querySelector('.modal-close-button');
+
+        const openModal = (imgSrc) => {
+            if (!viewerImage) return;
+            viewerImage.src = imgSrc;
+            imageViewerModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        };
+
+        const closeModal = () => {
+            imageViewerModal.classList.remove('active');
+            document.body.style.overflow = '';
+        };
+
+        document.body.addEventListener('click', (event) => {
+            const certItem = event.target.closest('.certification-item');
+            if (!certItem) return;
+            
+            const imgElement = certItem.querySelector('img');
+            if (imgElement) {
+                event.preventDefault();
+                openModal(imgElement.src);
+            }
+        });
+
+        if (closeButton) closeButton.addEventListener('click', closeModal);
+        imageViewerModal.addEventListener('click', (event) => {
+            if (event.target === imageViewerModal) {
+                closeModal();
+            }
+        });
+
+        // ESC 키 리스너는 포트폴리오 모달과 공유될 수 있으므로, 여기서도 확인
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape' && imageViewerModal.classList.contains('active')) {
+                closeModal();
+            }
+        });
+
+        document.body.dataset.imageViewerListenersAttached = 'true';
+        console.log("[Debug] Image viewer modal listeners attached successfully to body.");
+    }
+
     function initializeHeroCtaEffect() {
         console.log("[Debug] initializeHeroCtaEffect called.");
         // 이벤트 위임을 사용하여 body에 리스너 한 번만 등록
@@ -838,6 +892,7 @@ document.addEventListener('DOMContentLoaded', () => {
             reinitializeVanillaTilt();
             initializeFaqAccordion();
             initializePortfolioModal();
+            initializeImageViewerModal();
             initializeHeroCtaEffect();
             initializeServiceCardIconHover();
             initializeScrollProgressBar();

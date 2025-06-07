@@ -195,6 +195,7 @@ header .logo {
     letter-spacing: 1px;
     transition: transform 0.3s ease-out, color 0.3s ease-out;
     cursor: pointer;
+    text-decoration: none; /* 링크 밑줄 제거 */
 }
 
 header .logo:hover {
@@ -485,6 +486,44 @@ header ul.nav-links li a.nav-link.active::after {
 }
 
 /* --------------------
+   Certifications Section
+   -------------------- */
+.certifications-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 40px; /* 아이템 간 간격 */
+    margin-top: 50px;
+}
+
+.certification-item {
+    background-color: var(--light-navy);
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    border: 1px solid var(--lightest-navy);
+    transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+}
+
+.certification-item:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+}
+
+.certification-item img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+    margin-bottom: 15px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.certification-caption {
+    font-size: 1rem;
+    color: var(--text-light-primary);
+    font-weight: 500;
+}
+
+/* --------------------
    Team Section
    -------------------- */
 .team-section {
@@ -688,6 +727,55 @@ header ul.nav-links li a.nav-link.active::after {
     width: 100%;
     padding: 15px 30px;
     font-size: 1.05rem;
+}
+
+/* --------------------
+   Downloads Section
+   -------------------- */
+.downloads-list {
+    max-width: 800px; /* 목록 최대 너비 */
+    margin: 50px auto 0;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.download-item {
+    background-color: var(--light-navy);
+    border: 1px solid var(--lightest-navy);
+    border-radius: 8px;
+    padding: 20px 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background-color var(--transition-speed) ease, border-color var(--transition-speed) ease;
+}
+
+.download-item:hover {
+    background-color: var(--lightest-navy);
+    border-color: var(--accent-cyan);
+}
+
+.download-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.download-icon {
+    font-size: 1.8rem;
+    color: var(--accent-cyan);
+}
+
+.download-title {
+    font-size: 1.1rem;
+    color: var(--text-light-primary);
+    font-weight: 500;
+}
+
+.download-button {
+    padding: 8px 20px;
+    font-size: 0.9rem;
 }
 
 /* --------------------
@@ -1013,4 +1101,39 @@ footer p:first-child {
     z-index: 9998; /* 커서보다는 아래, 다른 일반 콘텐츠보다는 위에 오도록 */
     opacity: 1; /* 초기 opacity, GSAP에서 제어 */
     /* transform 속성은 GSAP에서 직접 제어 */
+} 
+
+/* --------------------
+   Image Viewer Modal Styles
+   -------------------- */
+#image-viewer-modal .modal-close-button {
+    position: fixed; /* 뷰포트 기준 */
+    top: 20px;
+    right: 30px;
+    font-size: 2.5rem;
+    color: rgba(255, 255, 255, 0.8);
+    transition: color 0.3s ease;
+}
+
+#image-viewer-modal .modal-close-button:hover {
+    color: #fff;
+}
+
+.image-viewer-content {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+}
+
+.image-viewer-content img {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain; /* 이미지 비율 유지 */
+    box-shadow: 0 0 50px rgba(0,0,0,0.5);
+    border-radius: 4px;
 } 

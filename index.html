@@ -22,12 +22,13 @@
 
   <header>
     <nav class="container">
-      <div class="logo">OAT</div>
+      <a href="#hero" class="logo">OAT</a>
       <ul class="nav-links">
         <li><a href="#about" class="nav-link">회사소개</a></li>
         <li><a href="#services" class="nav-link">솔루션</a></li>
         <li><a href="#portfolio" class="nav-link">포트폴리오</a></li>
-        <li><a href="#team" class="nav-link">팀 소개</a></li>
+        <li><a href="#certifications" class="nav-link">특허 및 인증</a></li>
+        <li><a href="#downloads" class="nav-link">자료실</a></li>
         <li><a href="#contact" class="nav-link">문의하기</a></li>
       </ul>
       <button class="menu-toggle" id="menu-toggle" aria-label="메뉴 열기/닫기">
@@ -101,7 +102,7 @@
                data-modal-title="OAT 기술 소개 영상"
                data-modal-video="https://www.youtube.com/embed/lxux0yCXs2Q"
                data-modal-description="OAT의 핵심 기술인 BFTC(Battery Fire Target Control)가 어떻게 전기차의 안전을 보장하는지 영상으로 확인해보세요. 실제 테스트 환경에서의 작동 원리와 뛰어난 성능을 직접 보실 수 있습니다."
-               data-modal-details='{&quot;Category&quot;: &quot;기술 소개&quot;, &quot;Running Time&quot;: &quot;2:35&quot;, &quot;Technologies&quot;: [&quot;BFTC&quot;, &quot;열폭주 차단 기술&quot;]}'>
+               data-modal-details='{&quot;Category&quot;: &quot;기술 소개&quot;, &quot;Running Time&quot;: &quot;3:48&quot;, &quot;Language&quot;: &quot;KOR/ENG&quot;, &quot;Technologies&quot;: [&quot;BFTC&quot;, &quot;열폭주 진압 기술 설명&quot;, &quot;진압 내부 프로세스 애니메이션 영상&quot;]}'>
             <img src="images/portfolio-video-thumb.png" alt="기술 소개 영상 썸네일">
             <div class="portfolio-info"><h3>기술 소개 영상</h3><p>OAT 핵심 기술</p></div>
           </div>
@@ -136,53 +137,22 @@
       </div>
     </section>
 
-    <section id="team" class="team-section content-section">
+    <section id="certifications" class="certifications-section content-section">
       <div class="container">
-        <h2 class="section-title" data-aos="fade-up">Our Team</h2>
-        <div class="team-grid">
-          <div class="team-member-card" data-aos="fade-up" data-aos-delay="100">
-            <div class="team-member-photo">
-              <img src="https://via.placeholder.com/250x250?text=Team+Member+1" alt="팀원 1 사진">
-            </div>
-            <div class="team-member-info">
-              <h3>이름 1</h3>
-              <p class="role">CEO & Founder</p>
-              <p class="bio">기술 혁신을 통해 세상을 변화시키는 것을 목표로 합니다.</p>
-              <div class="social-links">
-                <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-              </div>
-            </div>
+        <h2 class="section-title" data-aos="fade-up">Patents & Certifications</h2>
+        <div class="certifications-grid">
+          <div class="certification-item" data-aos="fade-up">
+            <img src="images/PATENT_1.png" alt="특허증 1">
+            <div class="certification-caption">특허증 (1)</div>
           </div>
-          <div class="team-member-card" data-aos="fade-up" data-aos-delay="200">
-            <div class="team-member-photo">
-              <img src="https://via.placeholder.com/250x250?text=Team+Member+2" alt="팀원 2 사진">
-            </div>
-            <div class="team-member-info">
-              <h3>이름 2</h3>
-              <p class="role">CTO</p>
-              <p class="bio">최고의 기술력으로 사용자에게 가치를 전달합니다.</p>
-              <div class="social-links">
-                <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-                <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
-              </div>
-            </div>
+          <div class="certification-item" data-aos="fade-up" data-aos-delay="150">
+            <img src="images/PATENT_2.png" alt="특허증 2">
+            <div class="certification-caption">특허증 (2)</div>
           </div>
-          <div class="team-member-card" data-aos="fade-up" data-aos-delay="300">
-            <div class="team-member-photo">
-              <img src="https://via.placeholder.com/250x250?text=Team+Member+3" alt="팀원 3 사진">
-            </div>
-            <div class="team-member-info">
-              <h3>이름 3</h3>
-              <p class="role">Lead Designer</p>
-              <p class="bio">사용자 중심의 아름다운 디자인을 추구합니다.</p>
-              <div class="social-links">
-                <a href="#" aria-label="Dribbble"><i class="fab fa-dribbble"></i></a>
-                <a href="#" aria-label="Behance"><i class="fab fa-behance"></i></a>
-              </div>
-            </div>
+          <div class="certification-item" data-aos="fade-up" data-aos-delay="300">
+            <img src="images/FILK_TEST_RESULT.png" alt="공인 인증 시험 성적서">
+            <div class="certification-caption">공인 인증 시험 성적서</div>
           </div>
-          <!-- 필요에 따라 팀원 카드 추가 -->
         </div>
       </div>
     </section>
@@ -218,7 +188,47 @@
               <p>요구사항 분석, 맞춤형 설계, 개발 및 테스트, 그리고 최종 배포 및 유지보수 단계를 거칩니다. 각 단계마다 고객과의 긴밀한 소통을 중요하게 생각합니다.</p>
             </div>
           </div>
+          <div class="faq-item" data-aos="fade-up" data-aos-delay="400">
+            <button class="faq-question" aria-expanded="false">
+              <span>새로운 네 번째 질문입니다.</span>
+              <i class="fas fa-chevron-down"></i>
+            </button>
+            <div class="faq-answer">
+              <p>네 번째 질문에 대한 답변 내용입니다.</p>
+            </div>
+          </div>
+          <div class="faq-item" data-aos="fade-up" data-aos-delay="500">
+            <button class="faq-question" aria-expanded="false">
+              <span>새로운 다섯 번째 질문입니다.</span>
+              <i class="fas fa-chevron-down"></i>
+            </button>
+            <div class="faq-answer">
+              <p>다섯 번째 질문에 대한 답변 내용입니다.</p>
+            </div>
+          </div>
           <!-- 필요에 따라 FAQ 아이템 추가 -->
+        </div>
+      </div>
+    </section>
+
+    <section id="downloads" class="downloads-section content-section">
+      <div class="container">
+        <h2 class="section-title" data-aos="fade-up">자료실</h2>
+        <div class="downloads-list" data-aos="fade-up" data-aos-delay="150">
+          <div class="download-item">
+            <div class="download-info">
+              <i class="fas fa-file-pdf download-icon"></i>
+              <span class="download-title">OAT 회사소개서</span>
+            </div>
+            <a href="downloads/OAT_Brochure.pdf" download="OAT_회사소개서.pdf" class="cta-button download-button">다운로드</a>
+          </div>
+          <div class="download-item">
+            <div class="download-info">
+              <i class="fas fa-file-pdf download-icon"></i>
+              <span class="download-title">BFTC 기술자료</span>
+            </div>
+            <a href="downloads/OAT_Brochure.pdf" download="OAT_기술자료.pdf" class="cta-button download-button">다운로드</a>
+          </div>
         </div>
       </div>
     </section>
@@ -229,10 +239,10 @@
         <p class="contact-subtitle" data-aos="fade-up" data-aos-delay="100">
           OAT의 기술과 솔루션에 대해 궁금한 점이 있으신가요? <br>언제든지 편하게 문의해주세요. 최고의 파트너가 되겠습니다.
         </p>
-        <form class="contact-form" data-aos="fade-up" data-aos-delay="200">
+        <form action="https://formspree.io/f/manjqzwr" method="POST" class="contact-form" data-aos="fade-up" data-aos-delay="200">
           <div class="form-group">
             <input type="text" id="name" name="name" placeholder="성함" required>
-            <input type="email" id="email" name="email" placeholder="이메일 주소" required>
+            <input type="email" id="email" name="_replyto" placeholder="이메일 주소" required>
           </div>
           <div class="form-group">
             <input type="text" id="subject" name="subject" placeholder="제목" required>
@@ -265,6 +275,14 @@
       <ul id="modal-details-list"></ul>
       <!-- 여기에 더 많은 상세 정보나 CTA 버튼 등을 추가할 수 있습니다. -->
     </div>
+  </div>
+
+  <!-- Image Viewer Modal -->
+  <div id="image-viewer-modal" class="modal-overlay">
+    <div class="image-viewer-content">
+      <img src="" alt="인증서 이미지 크게 보기">
+    </div>
+    <button class="modal-close-button" aria-label="닫기"><i class="fas fa-times"></i></button>
   </div>
 
   <script src="js/script.js"></script>
