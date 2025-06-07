@@ -587,100 +587,113 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function initializePortfolioModal() {
         console.log("[Debug] initializePortfolioModal called.");
+        // 이 함수는 이제 document.body에 단 한 번만 리스너를 부착합니다.
+        if (document.body.dataset.portfolioListenersAttached === 'true') {
+            console.log("[Debug] Portfolio modal listeners are already attached to the body. Skipping.");
+            return;
+        }
+        console.log("[Debug] Attaching portfolio modal listeners to the document body for the first time.");
+
         try {
-            const portfolioItems = document.querySelectorAll('.portfolio-item');
             const modalOverlay = document.getElementById('portfolio-modal');
             if (!modalOverlay) {
-                console.warn("[Debug] Portfolio modal overlay not found.");
-                return; 
+                console.warn("[Debug] Portfolio modal overlay not found. Cannot initialize.");
+                return;
             }
 
+            const modalVideoContainer = modalOverlay.querySelector('.modal-video-container');
+            const modalIframe = modalVideoContainer ? modalVideoContainer.querySelector('iframe') : null;
             const modalImg = modalOverlay.querySelector('#modal-img');
             const modalTitle = modalOverlay.querySelector('#modal-title');
             const modalDescription = modalOverlay.querySelector('#modal-description');
             const modalDetailsList = modalOverlay.querySelector('#modal-details-list');
             const closeModalButton = modalOverlay.querySelector('.modal-close-button');
 
-            portfolioItems.forEach(item => {
-                // 기존 이벤트 리스너 제거 (Barba.js 재실행 시 중복 방지)
-                const newItem = item.cloneNode(true);
-                if (item.parentNode) {
-                    item.parentNode.replaceChild(newItem, item);
-                } else {
-                    console.warn("[Debug] Portfolio item for modal has no parent, skipping replacement:", item);
-                    return; 
-                }
-
-                newItem.addEventListener('click', () => {
-                    console.log("[Debug] Portfolio item clicked for modal:", newItem.dataset.modalTitle);
-                    const title = newItem.dataset.modalTitle;
-                    const imgSrc = newItem.dataset.modalImage;
-                    const description = newItem.dataset.modalDescription;
-                    const detailsString = newItem.dataset.modalDetails;
-
-                    modalTitle.textContent = title;
-                    modalImg.src = imgSrc;
-                    modalImg.alt = title; // 이미지 alt 속성도 설정
-
-                    // 상세 정보 리스트 생성
-                    modalDetailsList.innerHTML = ''; // 기존 목록 초기화
-                    if (detailsString) {
-                        try {
-                            const details = JSON.parse(detailsString);
-                            for (const key in details) {
-                                if (details.hasOwnProperty(key)) {
-                                    const value = details[key];
-                                    const listItem = document.createElement('li');
-                                    if (Array.isArray(value)) {
-                                        listItem.innerHTML = `<strong>${key}:</strong> ${value.join(', ')}`;
-                                    } else {
-                                        listItem.innerHTML = `<strong>${key}:</strong> ${value}`;
-                                    }
-                                    modalDetailsList.appendChild(listItem);
-                                }
-                            }
-                        } catch (e) {
-                            console.error("[Debug] Error parsing modal details JSON:", e, "Raw details:", detailsString);
-                            const listItem = document.createElement('li');
-                            listItem.textContent = "상세 정보를 불러오는 데 실패했습니다.";
-                            modalDetailsList.appendChild(listItem);
-                        }
-                    }
-
-                    modalOverlay.classList.add('active');
-                    document.body.style.overflow = 'hidden'; // 모달 활성 시 body 스크롤 방지
-                });
-            });
-
             const closeModal = () => {
                 console.log("[Debug] Closing portfolio modal.");
                 modalOverlay.classList.remove('active');
-                document.body.style.overflow = ''; // 모달 닫을 시 body 스크롤 복원
+                document.body.style.overflow = '';
+                if (modalIframe && modalIframe.src) {
+                    modalIframe.src = ''; // 비디오 재생 중지
+                }
             };
 
-            if(closeModalButton) {
-                const newCloseModalButton = closeModalButton.cloneNode(true);
-                if(closeModalButton.parentNode) {
-                     closeModalButton.parentNode.replaceChild(newCloseModalButton, closeModalButton);
+            // 이벤트 위임: body에서 발생하는 클릭 이벤트를 감지
+            document.body.addEventListener('click', (event) => {
+                const item = event.target.closest('.portfolio-item');
+                if (!item) return;
+
+                event.preventDefault(); // 혹시 모를 기본 동작 방지
+
+                console.log("[Debug] Portfolio item clicked via body listener:", item.dataset.modalTitle);
+                
+                const videoUrl = item.dataset.modalVideo;
+                const imageUrl = item.dataset.modalImage;
+                const title = item.dataset.modalTitle;
+                const description = item.dataset.modalDescription;
+                const detailsString = item.dataset.modalDetails;
+
+                // 비디오 또는 이미지 컨테이너 제어
+                if (videoUrl && modalIframe) {
+                    modalIframe.src = videoUrl;
+                    modalVideoContainer.style.display = 'block';
+                    modalImg.style.display = 'none';
+                } else if (imageUrl) {
+                    modalImg.src = imageUrl;
+                    modalImg.alt = title;
+                    modalImg.style.display = 'block';
+                    if(modalVideoContainer) modalVideoContainer.style.display = 'none';
                 }
-                newCloseModalButton.addEventListener('click', closeModal);
-            }
-           
-            const newModalOverlay = modalOverlay.cloneNode(false); // shallow clone for overlay listener
-            if(modalOverlay.parentNode) {
-                modalOverlay.parentNode.replaceChild(newModalOverlay, modalOverlay);
-            }
-            newModalOverlay.addEventListener('click', (event) => {
-                if (event.target === newModalOverlay) { 
-                    closeModal();
+
+                modalTitle.textContent = title;
+                if(modalDescription) modalDescription.innerHTML = `<p>${description || ''}</p>`;
+
+                // 상세 정보 리스트 생성
+                modalDetailsList.innerHTML = '';
+                if (detailsString) {
+                    try {
+                        const details = JSON.parse(detailsString);
+                        for (const key in details) {
+                            if (details.hasOwnProperty(key)) {
+                                const value = details[key];
+                                const listItem = document.createElement('li');
+                                if (Array.isArray(value)) {
+                                    listItem.innerHTML = `<strong>${key}:</strong> ${value.join(', ')}`;
+                                } else {
+                                    listItem.innerHTML = `<strong>${key}:</strong> ${value}`;
+                                }
+                                modalDetailsList.appendChild(listItem);
+                            }
+                        }
+                    } catch (e) {
+                        console.error("[Debug] Error parsing modal details JSON:", e, "Raw details:", detailsString);
+                        const listItem = document.createElement('li');
+                        listItem.textContent = "상세 정보를 불러오는 데 실패했습니다.";
+                        modalDetailsList.appendChild(listItem);
+                    }
                 }
+
+                modalOverlay.classList.add('active');
+                document.body.style.overflow = 'hidden';
             });
+
+            // 닫기 버튼 리스너
+            if (closeModalButton) closeModalButton.addEventListener('click', closeModal);
+            // 오버레이 클릭 리스너
+            modalOverlay.addEventListener('click', (event) => {
+                if (event.target === modalOverlay) closeModal();
+            });
+            // ESC 키 리스너
             document.addEventListener('keydown', (event) => {
-                if (event.key === 'Escape' && newModalOverlay.classList.contains('active')) {
+                if (event.key === 'Escape' && modalOverlay.classList.contains('active')) {
                     closeModal();
                 }
             });
-            console.log("[Debug] Portfolio modal initialized for items:", portfolioItems);
+
+            // 리스너가 성공적으로 부착되었음을 표시
+            document.body.dataset.portfolioListenersAttached = 'true';
+            console.log("[Debug] Portfolio modal listeners attached successfully to body.");
+
         } catch (e) {
             console.error("[Debug] Error in initializePortfolioModal:", e);
         }
@@ -688,37 +701,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function initializeHeroCtaEffect() {
         console.log("[Debug] initializeHeroCtaEffect called.");
+        // 이벤트 위임을 사용하여 body에 리스너 한 번만 등록
+        if (document.body.dataset.heroCtaListenerAttached === 'true') return;
+        
         try {
-            const ctaButton = document.getElementById('hero-cta');
-            if (!ctaButton) {
-                console.warn("[Debug] Hero CTA button not found.");
-                return;
-            }
-            
-            // Barba.js 사용 시 이벤트 리스너 중복 방지를 위해 기존 요소 복제 및 교체
-            const newCtaButton = ctaButton.cloneNode(true);
-            if(ctaButton.parentNode) {
-                ctaButton.parentNode.replaceChild(newCtaButton, ctaButton);
-            } else {
-                console.warn("[Debug] Hero CTA button has no parent, skipping replacement for effect listener.");
-                return;
-            }
+            document.body.addEventListener('click', (e) => {
+                if (!e.target.closest('#hero-cta')) return;
 
-            newCtaButton.addEventListener('click', (e) => {
-                // 기본 링크 이동은 유지하되, 애니메이션을 위한 약간의 지연을 줄 수 있으나 여기선 즉시 실행
-                // e.preventDefault(); // 링크 이동을 막고 싶을 경우
-
-                const rect = newCtaButton.getBoundingClientRect();
+                const ctaButton = e.target.closest('#hero-cta');
+                const rect = ctaButton.getBoundingClientRect();
                 const clickX = e.clientX - rect.left;
                 const clickY = e.clientY - rect.top;
 
-                for (let i = 0; i < 15; i++) { // 15개의 파티클 생성
+                for (let i = 0; i < 15; i++) {
                     const particle = document.createElement('div');
                     particle.classList.add('cta-particle');
-                    document.body.appendChild(particle); // body에 직접 추가하여 다른 요소에 가려지지 않도록
+                    document.body.appendChild(particle);
 
-                    // 초기 위치: 버튼 내 클릭 지점 또는 버튼 중앙
-                    // 여기서는 버튼의 클릭된 위치를 중심으로 퍼지도록 설정
                     gsap.set(particle, {
                         x: rect.left + clickX,
                         y: rect.top + clickY,
@@ -726,19 +725,20 @@ document.addEventListener('DOMContentLoaded', () => {
                     });
 
                     gsap.to(particle, {
-                        x: gsap.utils.random(-80, 80, true),
-                        y: gsap.utils.random(-80, 80, true),
+                        x: `+=${gsap.utils.random(-80, 80)}`,
+                        y: `+=${gsap.utils.random(-80, 80)}`,
                         opacity: 0,
                         scale: gsap.utils.random(0.3, 1),
                         duration: gsap.utils.random(0.5, 1),
                         ease: "power2.out",
                         onComplete: () => {
-                            particle.remove(); // 애니메이션 완료 후 파티클 제거
+                            particle.remove();
                         }
                     });
                 }
             });
-            console.log("[Debug] Hero CTA effect initialized.");
+            document.body.dataset.heroCtaListenerAttached = 'true';
+            console.log("[Debug] Hero CTA effect listener attached to body.");
         } catch (e) {
             console.error("[Debug] Error in initializeHeroCtaEffect:", e);
         }
@@ -746,39 +746,45 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function initializeServiceCardIconHover() {
         console.log("[Debug] initializeServiceCardIconHover called.");
-        try {
-            const serviceCards = document.querySelectorAll('.service-card');
-            serviceCards.forEach(card => {
-                // Barba.js 페이지 전환 시 이벤트 리스너 중복 방지를 위해 cloneNode 및 replaceChild 사용
-                const newCard = card.cloneNode(true);
-                if(card.parentNode){
-                    card.parentNode.replaceChild(newCard, card);
-                } else {
-                     console.warn("[Debug] Service card for icon hover has no parent, skipping replacement.");
-                     return; // skip this card
-                }
+        if (document.body.dataset.serviceCardHoverAttached === 'true') return;
 
-                const icon = newCard.querySelector('.service-icon img');
+        try {
+            document.body.addEventListener('mouseover', (e) => {
+                const card = e.target.closest('.service-card');
+                if (!card) return;
+                
+                // GSAP에 의해 이미 애니메이션이 진행 중인지 확인 (선택적)
+                if (gsap.isTweening(card)) return;
+
+                const icon = card.querySelector('.service-icon img');
                 if (icon) {
-                    newCard.addEventListener('mouseenter', () => {
-                        gsap.to(icon, { 
-                            scale: 1.15, 
-                            rotateZ: 8,
-                            duration: 0.3, 
-                            ease: 'power2.out' 
-                        });
-                    });
-                    newCard.addEventListener('mouseleave', () => {
-                        gsap.to(icon, { 
-                            scale: 1, 
-                            rotateZ: 0,
-                            duration: 0.3, 
-                            ease: 'power2.out' 
-                        });
+                    gsap.to(icon, { 
+                        scale: 1.15, 
+                        rotateZ: 8,
+                        duration: 0.3, 
+                        ease: 'power2.out' 
                     });
                 }
             });
-            console.log("[Debug] Service card icon hover initialized for cards:", serviceCards);
+
+            document.body.addEventListener('mouseout', (e) => {
+                const card = e.target.closest('.service-card');
+                if (!card) return;
+                
+                if (gsap.isTweening(card)) return;
+
+                const icon = card.querySelector('.service-icon img');
+                if (icon) {
+                    gsap.to(icon, { 
+                        scale: 1, 
+                        rotateZ: 0,
+                        duration: 0.3, 
+                        ease: 'power2.out' 
+                    });
+                }
+            });
+            document.body.dataset.serviceCardHoverAttached = 'true';
+            console.log("[Debug] Service card icon hover listeners attached to body.");
         } catch (e) {
             console.error("[Debug] Error in initializeServiceCardIconHover:", e);
         }
@@ -857,6 +863,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 sync: true, 
                 timeout: 7000, 
                 debug: true, // Enable Barba's own debug mode
+                prevent: ({ el }) => {
+                    // href 속성값이 '#'으로 시작하는 링크는 Barba.js가 처리하지 않도록 방지
+                    const href = el.getAttribute('href');
+                    return href && href.startsWith('#');
+                },
                 transitions: [{
                     name: 'slide-transition',
                     once(data) {
