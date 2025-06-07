@@ -308,7 +308,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             
             // 일반 [data-aos] 요소 처리 (About 텍스트, Service 카드, Portfolio 아이템 제외)
-            const 일반RevealElements = gsap.utils.toArray('[data-aos]:not(.about-text h3):not(.about-text p):not(.service-card):not(.portfolio-item)');
+            const 일반RevealElements = gsap.utils.toArray('[data-aos]:not(.section-title):not(.about-text h3):not(.about-text p):not(.service-card):not(.portfolio-item)');
             console.log('[GSAP Debug] 일반RevealElements:', 일반RevealElements);
             일반RevealElements.forEach((el) => {
                 const delay = parseFloat(el.dataset.aosDelay) / 1000 || 0;
@@ -416,6 +416,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         duration: 0.6, 
                         stagger: 0.15, 
                         ease: "power2.out",
+                        immediateRender: false,
                         onStart: function() {
                             console.log('[GSAP Debug] Service cards animation STARTED for:', this.targets());
                         },
@@ -429,7 +430,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         },
                         scrollTrigger: {
                             trigger: ".services-grid", start: "top 80%", // markers: true, // 사용자가 제거 요청
-                            toggleActions: "restart none none reset",
+                            toggleActions: "play none none none",
                             onEnter: () => {
                                 console.log('[GSAP Debug] Service cards ST onEnter for group. Attempting to animate.');
                             },
@@ -465,6 +466,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         duration: 0.7, 
                         stagger: 0.2, 
                         ease: "power2.out",
+                        immediateRender: false,
                         onStart: function() {
                             console.log('[GSAP Debug] Portfolio items animation STARTED for:', this.targets());
                         },
@@ -478,7 +480,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         },
                         scrollTrigger: {
                             trigger: ".portfolio-grid", start: "top 80%", // markers: true, // 사용자가 제거 요청
-                            toggleActions: "restart none none reset",
+                            toggleActions: "play none none none",
                             onEnter: () => {
                                 console.log('[GSAP Debug] Portfolio items ST onEnter for group. Attempting to animate.');
                             },
@@ -820,56 +822,30 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    function runAllInitializers() {
+        console.log("[Debug] Running all initializers...");
+        try {
+            initializeCustomCursor();
+            initializeHeaderScroll();
+            initializeMobileNavigation();
+            reinitializeGsapAnimations();
+            reinitializeVanillaTilt();
+            initializeFaqAccordion();
+            initializePortfolioModal();
+            initializeHeroCtaEffect();
+            initializeServiceCardIconHover();
+            initializeScrollProgressBar();
+        } catch(e) {
+            console.error("[Debug] Error during initialization sequence:", e);
+        }
+        console.log("[Debug] All initializers finished.");
+    }
+
     // --------------------
     // Initial Calls on DOMContentLoaded
     // --------------------
     console.log("[Debug] Starting initial calls on DOMContentLoaded...");
-    try {
-        console.log("[Debug] Calling initializeCustomCursor...");
-        initializeCustomCursor();
-        console.log("[Debug] initializeCustomCursor finished.");
-
-        console.log("[Debug] Calling initializeHeaderScroll...");
-        initializeHeaderScroll();
-        console.log("[Debug] initializeHeaderScroll finished.");
-
-        console.log("[Debug] Calling initializeMobileNavigation...");
-        initializeMobileNavigation();
-        console.log("[Debug] initializeMobileNavigation finished.");
-
-        console.log("[Debug] Calling reinitializeGsapAnimations (initial call)...");
-        reinitializeGsapAnimations();
-        console.log("[Debug] reinitializeGsapAnimations finished for initial call.");
-
-        console.log("[Debug] Calling reinitializeVanillaTilt...");
-        reinitializeVanillaTilt();
-        console.log("[Debug] reinitializeVanillaTilt finished.");
-
-        console.log("[Debug] Calling initializeFaqAccordion...");
-        initializeFaqAccordion();
-        console.log("[Debug] initializeFaqAccordion finished.");
-
-        console.log("[Debug] Calling initializePortfolioModal...");
-        initializePortfolioModal();
-        console.log("[Debug] initializePortfolioModal finished.");
-
-        console.log("[Debug] Calling initializeHeroCtaEffect...");
-        initializeHeroCtaEffect();
-        console.log("[Debug] initializeHeroCtaEffect finished.");
-
-        console.log("[Debug] Calling initializeServiceCardIconHover...");
-        initializeServiceCardIconHover();
-        console.log("[Debug] initializeServiceCardIconHover finished.");
-
-        console.log("[Debug] Calling initializeScrollProgressBar...");
-        initializeScrollProgressBar();
-        console.log("[Debug] initializeScrollProgressBar finished.");
-
-        console.log("[Debug] All initial calls on DOMContentLoaded completed.");
-    } catch (e) {
-        console.error("[Debug] Error during initial calls on DOMContentLoaded:", e);
-    }
-
+    
     // --------------------
     // Barba.js Initialization
     // --------------------
@@ -885,21 +861,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     name: 'slide-transition',
                     once(data) {
                         console.log('[Barba Debug] "once" handler called. Data:', data);
-                        try {
-                            console.log('[Barba Debug] "once" handler: Calling initializeCustomCursor...'); initializeCustomCursor(); 
-                            console.log('[Barba Debug] "once" handler: Calling initializeHeaderScroll...'); initializeHeaderScroll();
-                            console.log('[Barba Debug] "once" handler: Calling initializeMobileNavigation...'); initializeMobileNavigation();
-                            console.log('[Barba Debug] "once" handler: Calling reinitializeGsapAnimations...'); reinitializeGsapAnimations(); 
-                            console.log('[Barba Debug] "once" handler: Calling reinitializeVanillaTilt...'); reinitializeVanillaTilt();
-                            console.log('[Barba Debug] "once" handler: Calling initializeFaqAccordion...'); initializeFaqAccordion();
-                            console.log('[Barba Debug] "once" handler: Calling initializePortfolioModal...'); initializePortfolioModal();
-                            console.log('[Barba Debug] "once" handler: Calling initializeHeroCtaEffect...'); initializeHeroCtaEffect();
-                            console.log('[Barba Debug] "once" handler: Calling initializeServiceCardIconHover...'); initializeServiceCardIconHover();
-                            console.log('[Barba Debug] "once" handler: Calling initializeScrollProgressBar...'); initializeScrollProgressBar();
-                            console.log('[Barba Debug] "once" handler finished all initializations.');
-                        } catch (e) {
-                            console.error('[Barba Debug] Error in "once" handler initializations:', e);
-                        }
+                        runAllInitializers();
                     },
                     async leave(data) {
                         console.log('[Barba Debug] "leave" handler called. Current container:', data.current.container);
@@ -920,22 +882,8 @@ document.addEventListener('DOMContentLoaded', () => {
                         gsap.to(data.next.container, {
                             opacity: 1, y: 0, duration: 0.5, ease: "power2.out", delay: 0.2, 
                             onComplete: () => {
-                                console.log('[Barba Debug] "enter" animation complete, calling initializations...');
-                                try {
-                                    console.log('[Barba Debug] "enter" onComplete: Calling initializeCustomCursor...'); initializeCustomCursor(); 
-                                    console.log('[Barba Debug] "enter" onComplete: Calling initializeHeaderScroll...'); initializeHeaderScroll();
-                                    console.log('[Barba Debug] "enter" onComplete: Calling initializeMobileNavigation...'); initializeMobileNavigation();
-                                    console.log('[Barba Debug] "enter" onComplete: Calling reinitializeGsapAnimations...'); reinitializeGsapAnimations();
-                                    console.log('[Barba Debug] "enter" onComplete: Calling reinitializeVanillaTilt...'); reinitializeVanillaTilt();
-                                    console.log('[Barba Debug] "enter" onComplete: Calling initializeFaqAccordion...'); initializeFaqAccordion();
-                                    console.log('[Barba Debug] "enter" onComplete: Calling initializePortfolioModal...'); initializePortfolioModal();
-                                    console.log('[Barba Debug] "enter" onComplete: Calling initializeHeroCtaEffect...'); initializeHeroCtaEffect();
-                                    console.log('[Barba Debug] "enter" onComplete: Calling initializeServiceCardIconHover...'); initializeServiceCardIconHover();
-                                    console.log('[Barba Debug] "enter" onComplete: Calling initializeScrollProgressBar...'); initializeScrollProgressBar();
-                                    console.log('[Barba Debug] "enter" onComplete finished all initializations.');
-                                } catch (e) {
-                                    console.error('[Barba Debug] Error in "enter" onComplete initializations:', e);
-                                }
+                                console.log('[Barba Debug] "enter" animation complete, calling initializers...');
+                                runAllInitializers();
                             }
                         });
                     }
@@ -946,7 +894,8 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error('[Barba Debug] Error initializing Barba.js:', e);
         }
     } else {
-        console.warn("[Barba Debug] Barba.js library not loaded. Page transitions disabled.");
+        console.warn("[Barba Debug] Barba.js library not loaded. Page transitions disabled. Running initializers directly.");
+        runAllInitializers();
     }
     console.log('[Debug] End of DOMContentLoaded event listener.');
 }); // End of DOMContentLoaded 
