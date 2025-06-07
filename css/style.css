@@ -462,10 +462,10 @@ header ul.nav-links li a.nav-link.active::after {
     bottom: 0;
     left: 0;
     width: 100%;
-    background: linear-gradient(to top, rgba(10, 25, 47, 0.95), transparent); /* 그라데이션 오버레이 */
+    background: linear-gradient(to top, rgba(10, 25, 47, 0.95), transparent);
     color: var(--white-color);
     padding: 30px 20px 20px;
-    transform: translateY(100%); /* 초기 숨김 */
+    transform: translateY(100%);
     transition: transform var(--transition-speed) ease-in-out;
 }
 
@@ -483,6 +483,30 @@ header ul.nav-links li a.nav-link.active::after {
 .portfolio-info p {
     font-size: 0.9rem;
     color: var(--text-light-primary);
+}
+
+.portfolio-plus-icon {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 35px;
+    height: 35px;
+    background-color: var(--accent-cyan);
+    color: var(--bg-dark-primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    opacity: 0;
+    transform: scale(0.5) rotate(-180deg);
+    transition: all 0.4s ease;
+    pointer-events: none;
+}
+
+.portfolio-item:hover .portfolio-plus-icon {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
 }
 
 /* --------------------
@@ -911,6 +935,35 @@ footer p:first-child {
     .contact-form {
         padding: 30px;
     }
+
+    .portfolio-item {
+        cursor: pointer; /* 모바일에서 클릭 가능함을 암시 */
+    }
+
+    .portfolio-item:hover img {
+        transform: none; /* 모바일에서는 이미지 확대 효과 제거 */
+    }
+    
+    .portfolio-info {
+        position: static;
+        transform: none;
+        background: var(--light-navy);
+        padding: 20px;
+        text-align: left;
+    }
+    
+    .portfolio-item:hover .portfolio-info {
+        transform: none;
+    }
+
+    .portfolio-plus-icon {
+        opacity: 1;
+        transform: scale(1) rotate(0deg);
+        top: auto; /* 위치 재설정 */
+        bottom: 15px;
+        right: 15px;
+        pointer-events: auto; /* 아이콘 자체도 클릭 가능하도록 */
+    }
 }
 
 @media (max-width: 480px) {
@@ -965,7 +1018,7 @@ footer p:first-child {
 
 .modal-content {
     background-color: var(--light-navy);
-    padding: 30px;
+    padding: 70px 30px 30px; /* 상단 패딩을 더 늘려 버튼과 영상의 간격 확보 */
     border-radius: 8px;
     box-shadow: 0 5px 20px rgba(0,0,0,0.3);
     width: 90%;
@@ -983,18 +1036,26 @@ footer p:first-child {
 
 .modal-close-button {
     position: absolute;
-    top: 15px;
-    right: 15px;
-    background: none;
-    border: none;
+    top: 20px;
+    right: 20px;
+    background: rgba(10, 25, 47, 0.7);
+    border: 1px solid var(--lightest-navy);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
     color: var(--text-light-secondary);
-    font-size: 1.8rem;
+    font-size: 1.2rem;
     cursor: pointer;
-    transition: color var(--transition-speed) ease;
+    transition: all var(--transition-speed) ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .modal-close-button:hover {
-    color: var(--accent-cyan);
+    background-color: var(--accent-cyan);
+    color: var(--bg-dark-primary);
+    transform: scale(1.1);
 }
 
 #modal-img {
@@ -1077,7 +1138,7 @@ footer p:first-child {
 /* 모달 반응형 */
 @media (max-width: 768px) {
     .modal-content {
-        padding: 20px;
+        padding: 60px 20px 20px; /* 모바일에서 상단 패딩 재조정 */
         max-height: 85vh;
     }
     #modal-title {
