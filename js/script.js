@@ -280,113 +280,43 @@ document.addEventListener('DOMContentLoaded', () => {
     function reinitializeGsapAnimations() {
         console.log('[GSAP Debug] reinitializeGsapAnimations called');
         try {
-            scrollTriggers.forEach(st => st.kill());
-            scrollTriggers = [];
-            gsap.killTweensOf('.section-title'); 
-            gsap.killTweensOf('.about-image img');
-            gsap.killTweensOf('.about-text h3, .about-text p');
-            gsap.killTweensOf('.service-card'); // 서비스 카드 트윈 정리
-            gsap.killTweensOf('.portfolio-item'); // 포트폴리오 아이템 트윈 정리
-
-            console.log('[GSAP Debug] Old ScrollTriggers and tweens killed.');
-
-            // Hero Section Animation (페이지 로드 시 한 번만 실행되도록 조건 추가)
-            if (!document.body.classList.contains('hero-animated')) {
-                console.log('[GSAP Debug] Initializing hero animation');
+            // Note: Cleanup is now handled by Barba's 'leave' hook. This function just creates new animations.
+            
+            // Hero Section Animation (runs only on the home page)
+            if (document.querySelector('#hero-title-line1') && !document.body.classList.contains('hero-animated')) {
                 const heroTimeline = gsap.timeline({ delay: 0.5 });
                 heroTimeline
-                    .fromTo("#hero-title-line1", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" })
-                    .fromTo("#hero-title-line2", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" }, "-=0.6")
-                    .fromTo("#hero-subtitle", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.7, ease: "power2.out" }, "-=0.5")
-                    .fromTo("#hero-cta", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6, ease: "back.out(1.7)" }, "-=0.4")
-                    .call(() => {
-                        document.body.classList.add('hero-animated');
-                        console.log('[GSAP Debug] Hero animation complete, body class added.');
-                    });
-            } else {
-                console.log('[GSAP Debug] Hero already animated.');
+                    .from("#hero-title-line1", { autoAlpha: 0, y: 20, duration: 0.8, ease: "power3.out" })
+                    .from("#hero-title-line2", { autoAlpha: 0, y: 20, duration: 0.8, ease: "power3.out" }, "-=0.6")
+                    .from("#hero-subtitle", { autoAlpha: 0, y: 20, duration: 0.7, ease: "power2.out" }, "-=0.5")
+                    .from("#hero-cta", { autoAlpha: 0, y: 20, duration: 0.6, ease: "back.out(1.7)" }, "-=0.4")
+                    .call(() => document.body.classList.add('hero-animated'));
             }
-            
-            // 일반 [data-aos] 요소 처리 (About 텍스트, Service 카드, Portfolio 아이템 제외)
-            const 일반RevealElements = gsap.utils.toArray('[data-aos]:not(.section-title):not(.about-text h3):not(.about-text p):not(.service-card):not(.portfolio-item)');
-            console.log('[GSAP Debug] 일반RevealElements:', 일반RevealElements);
-            일반RevealElements.forEach((el) => {
-                const delay = parseFloat(el.dataset.aosDelay) / 1000 || 0;
-                const animationType = el.dataset.aos;
-                let startX = 0, startY = 0, startScale = 1; // startOpacity는 0으로 고정
-        
-                if (animationType === 'fade-up') { startY = 50; }
-                else if (animationType === 'fade-right') { startX = -50; }
-                else if (animationType === 'fade-left') { startX = 50; }
-                
-                gsap.set(el, { opacity: 0, x: startX, y: startY, scale: startScale });
-                let st = ScrollTrigger.create({
-                    trigger: el,
-                    start: "top 85%",
-                    // markers: true, // 일반 요소에 대한 마커는 주석 처리 (필요시 활성화)
-                    toggleActions: "play none none none",
-                    onEnter: () => {
-                        console.log('[GSAP Debug] 일반 요소 entering:', el);
-                        gsap.to(el, {
-                            opacity: 1, x: 0, y: 0, scale: 1,
-                            duration: 0.8,
-                            delay: delay,
-                            ease: "power2.out"
-                        });
-                    }
-                });
-                scrollTriggers.push(st);
-            });
-            console.log('[GSAP Debug] 일반RevealElements processing done.');
-            
-            // Section Title animation (모든 섹션 타이틀에 일괄 적용)
-            gsap.utils.toArray('.section-title').forEach(title => {
-                gsap.set(title, {opacity:0, y: 50});
-                let st = ScrollTrigger.create({
-                    trigger: title,
-                    start: 'top 90%',
-                    // markers: true, // 제목에 대한 마커는 주석 처리 (필요시 활성화)
-                    toggleActions: 'play none none none',
-                    onEnter: () => {
-                        console.log('[GSAP Debug] Section title entering:', title);
-                        gsap.to(title, { opacity:1, y: 0, duration: 0.6, ease: 'power2.out'});
-                    }
-                });
-                scrollTriggers.push(st);
-            });
-            console.log('[GSAP Debug] Section titles processing done.');
 
-            // About Us 섹션 - 텍스트 순차 등장
-            const aboutTextElements = gsap.utils.toArray('.about-text h3, .about-text p');
-            console.log('[GSAP Debug] About text elements:', aboutTextElements);
-            if (aboutTextElements.length > 0) {
-                gsap.set(aboutTextElements, { opacity: 0, y: 30 });
-                let stAboutText = ScrollTrigger.create({
-                    trigger: ".about-text",
-                    start: "top 80%",
-                    // markers: true, // About 텍스트 마커 (필요시 활성화)
-                    toggleActions: "play none none none",
-                    onEnter: () => {
-                        console.log('[GSAP Debug] About text entering...');
-                        gsap.to(aboutTextElements, {
-                            opacity: 1,
-                            y: 0,
-                            duration: 0.7,
-                            stagger: 0.2,
-                            ease: "power2.out"
+            // Batch animation for all other elements
+            const batchElements = gsap.utils.toArray('.section-title, .about-text h3, .about-text p, .service-card, .portfolio-item, [data-aos]');
+            
+            if(batchElements.length > 0) {
+                const newTriggers = ScrollTrigger.batch(batchElements, {
+                    interval: 0.1,
+                    batchMax: 3,
+                    immediate: true,
+                    onEnter: batch => {
+                        gsap.from(batch, {
+                            autoAlpha: 0,
+                            y: 50,
+                            stagger: 0.15,
+                            ease: 'power2.out'
                         });
-                    }
+                    },
                 });
-                scrollTriggers.push(stAboutText);
-            } else {
-                console.log('[GSAP Debug] No About text elements found.');
+                window.activeScrollTriggers.push(...newTriggers); // Store new triggers for cleanup
             }
 
             // About Section Image Parallax
             const aboutImage = document.querySelector('.about-image img');
             if (aboutImage) {
-                console.log('[GSAP Debug] Initializing About image parallax for:', aboutImage);
-                let stAboutImage = gsap.to(aboutImage, {
+                const stAboutImage = gsap.to(aboutImage, {
                     yPercent: -15,
                     ease: "none",
                     scrollTrigger: {
@@ -394,140 +324,39 @@ document.addEventListener('DOMContentLoaded', () => {
                         start: "top bottom",
                         end: "bottom top",
                         scrub: true
-                        // markers: true, // About 이미지 패럴랙스 마커 (필요시 활성화)
                     }
                 });
                 if (stAboutImage.scrollTrigger) {
-                     scrollTriggers.push(stAboutImage.scrollTrigger);
+                    window.activeScrollTriggers.push(stAboutImage.scrollTrigger); // Store new trigger
                 }
-            } else {
-                console.log('[GSAP Debug] About image not found.');
-            }
-
-            // Services 섹션 - 카드 스태거 등장
-            const serviceCards = gsap.utils.toArray('.service-card');
-            console.log('[GSAP Debug] Service cards found:', serviceCards);
-            if (serviceCards.length > 0) {
-                const serviceAnimation = gsap.fromTo(serviceCards,
-                    { autoAlpha: 0, y: 50 }, // opacity와 visibility 대신 autoAlpha 사용
-                    { 
-                        autoAlpha: 1, // opacity와 visibility 대신 autoAlpha 사용
-                        y: 0, 
-                        duration: 0.6, 
-                        stagger: 0.15, 
-                        ease: "power2.out",
-                        immediateRender: false,
-                        onStart: function() {
-                            console.log('[GSAP Debug] Service cards animation STARTED for:', this.targets());
-                        },
-                        onComplete: function() {
-                            console.log('[GSAP Debug] Service cards animation COMPLETED for:', this.targets());
-                            if (serviceCards.length > 0) {
-                                console.log('[GSAP Debug] autoAlpha of first service card AFTER animation:', gsap.getProperty(serviceCards[0], "autoAlpha"));
-                                // console.log('[GSAP Debug] Opacity of first service card AFTER animation:', gsap.getProperty(serviceCards[0], "opacity"));
-                                // console.log('[GSAP Debug] Visibility of first service card AFTER animation:', gsap.getProperty(serviceCards[0], "visibility"));
-                            }
-                        },
-                        scrollTrigger: {
-                            trigger: ".services-grid", start: "top 80%", // markers: true, // 사용자가 제거 요청
-                            toggleActions: "play none none none",
-                            onEnter: () => {
-                                console.log('[GSAP Debug] Service cards ST onEnter for group. Attempting to animate.');
-                            },
-                            onLeave: () => console.log('[GSAP Debug] Service cards ST onLeave for group'),
-                            onEnterBack: () => console.log('[GSAP Debug] Service cards ST onEnterBack for group'),
-                            onLeaveBack: () => console.log('[GSAP Debug] Service cards ST onLeaveBack for group')
-                        }
-                    }
-                );
-                if (serviceAnimation.scrollTrigger) {
-                    scrollTriggers.push(serviceAnimation.scrollTrigger);
-                    console.log('[GSAP Debug] Service cards animation and ScrollTrigger created.');
-                } else {
-                    // 이 경우는 gsap.fromTo가 ScrollTrigger를 생성하지 못했을 때 (매우 드묾)
-                    console.error('[GSAP Debug] Service animation did NOT create a scrollTrigger property!');
-                    // 만약 ScrollTrigger를 생성하지 않는다면, 수동으로 만들어서 추가해야 할 수 있지만,
-                    // fromTo 내에서 scrollTrigger를 정의하면 자동으로 생성되어야 합니다.
-                }
-            } else {
-                console.log('[GSAP Debug] No service cards found or length is 0.');
-            }
-
-            // Portfolio 섹션 - 아이템 스태거 등장 (zoom-in-up 효과 유사하게)
-            const portfolioItems = gsap.utils.toArray('.portfolio-item');
-            console.log('[GSAP Debug] Portfolio items found:', portfolioItems);
-            if (portfolioItems.length > 0) {
-                const portfolioAnimation = gsap.fromTo(portfolioItems,
-                    { autoAlpha: 0, scale: 0.8, y: 30 }, // opacity와 visibility 대신 autoAlpha 사용
-                    {
-                        autoAlpha: 1, // opacity와 visibility 대신 autoAlpha 사용
-                        scale: 1, 
-                        y: 0, 
-                        duration: 0.7, 
-                        stagger: 0.2, 
-                        ease: "power2.out",
-                        immediateRender: false,
-                        onStart: function() {
-                            console.log('[GSAP Debug] Portfolio items animation STARTED for:', this.targets());
-                        },
-                        onComplete: function() {
-                            console.log('[GSAP Debug] Portfolio items animation COMPLETED for:', this.targets());
-                            if (portfolioItems.length > 0) {
-                                console.log('[GSAP Debug] autoAlpha of first portfolio item AFTER animation:', gsap.getProperty(portfolioItems[0], "autoAlpha"));
-                                // console.log('[GSAP Debug] Opacity of first portfolio item AFTER animation:', gsap.getProperty(portfolioItems[0], "opacity"));
-                                // console.log('[GSAP Debug] Visibility of first portfolio item AFTER animation:', gsap.getProperty(portfolioItems[0], "visibility"));
-                            }
-                        },
-                        scrollTrigger: {
-                            trigger: ".portfolio-grid", start: "top 80%", // markers: true, // 사용자가 제거 요청
-                            toggleActions: "play none none none",
-                            onEnter: () => {
-                                console.log('[GSAP Debug] Portfolio items ST onEnter for group. Attempting to animate.');
-                            },
-                            onLeave: () => console.log('[GSAP Debug] Portfolio items ST onLeave for group'),
-                            onEnterBack: () => console.log('[GSAP Debug] Portfolio items ST onEnterBack for group'),
-                            onLeaveBack: () => console.log('[GSAP Debug] Portfolio items ST onLeaveBack for group')
-                        }
-                    }
-                );
-                if (portfolioAnimation.scrollTrigger) {
-                    scrollTriggers.push(portfolioAnimation.scrollTrigger);
-                    console.log('[GSAP Debug] Portfolio items animation and ScrollTrigger created.');
-                } else {
-                    console.error('[GSAP Debug] Portfolio animation did NOT create a scrollTrigger property!');
-                }
-            } else {
-                console.log('[GSAP Debug] No portfolio items found or length is 0.');
             }
             
-            console.log('[GSAP Debug] Attempting ScrollTrigger.refresh(). Current triggers:', scrollTriggers.length);
-            ScrollTrigger.refresh(); // 모든 ScrollTrigger 설정 후 한번만 호출
-            console.log('[GSAP Debug] ScrollTrigger.refresh() finished.');
+            console.log('[GSAP Debug] ScrollTrigger.refresh() called. Total active triggers:', window.activeScrollTriggers.length);
+            ScrollTrigger.refresh();
+
         } catch (e) {
             console.error('[GSAP Debug] Error in reinitializeGsapAnimations:', e);
         }
-        console.log('[GSAP Debug] reinitializeGsapAnimations finished execution.');
     }
 
     function reinitializeVanillaTilt() {
         console.log("[Debug] reinitializeVanillaTilt called.");
         try {
             if (typeof VanillaTilt !== 'undefined') {
-                // 기존 VanillaTilt 인스턴스 제거 (VanillaTilt 자체에 destroy 메서드가 없을 수 있음)
-                // DOM 요소를 다시 선택하여 초기화하는 것으로 대체
-                const tiltElements = document.querySelectorAll(".service-card, .portfolio-item");
-                tiltElements.forEach(el => {
-                    if (el.vanillaTilt) {
-                        el.vanillaTilt.destroy(); // 만약 destroy 메서드가 있다면 사용
-                    }
-                });
+                const tiltElements = document.querySelectorAll(".service-card, .portfolio-item, .component-item");
+                
+                // This function now ONLY initializes. Cleanup is handled by Barba's 'leave' hook.
                 VanillaTilt.init(tiltElements, {
                     max: 8, 
                     speed: 400, 
                     glare: true,
                     "max-glare": 0.1 
                 });
-                console.log("[Debug] VanillaTilt reinitialized for elements:", tiltElements);
+                
+                // Store fresh instances in the global array for cleanup on the next leave.
+                window.activeTiltInstances = Array.from(tiltElements).map(el => el.vanillaTilt).filter(Boolean);
+                console.log(`[VanillaTilt] Initialized and stored ${window.activeTiltInstances.length} new instances.`);
+
             } else {
                 console.warn("VanillaTilt.js not loaded. Tilt effect disabled.");
             }
@@ -587,12 +416,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function initializePortfolioModal() {
         console.log("[Debug] initializePortfolioModal called.");
-        // 이 함수는 이제 document.body에 단 한 번만 리스너를 부착합니다.
+        // This function now uses event delegation and only needs to set up listeners once.
         if (document.body.dataset.portfolioListenersAttached === 'true') {
-            console.log("[Debug] Portfolio modal listeners are already attached to the body. Skipping.");
+            console.log("[Debug] Portfolio modal listeners are already attached to the body.");
             return;
         }
-        console.log("[Debug] Attaching portfolio modal listeners to the document body for the first time.");
 
         try {
             const modalOverlay = document.getElementById('portfolio-modal');
@@ -609,90 +437,78 @@ document.addEventListener('DOMContentLoaded', () => {
             const modalDetailsList = modalOverlay.querySelector('#modal-details-list');
             const closeModalButton = modalOverlay.querySelector('.modal-close-button');
 
+            const openModal = (triggerElement) => {
+                const data = triggerElement.dataset;
+                console.log("[Debug] Opening portfolio modal with data:", data);
+
+                if (data.modalVideo && modalIframe) {
+                    modalIframe.src = data.modalVideo;
+                    modalVideoContainer.style.display = 'block';
+                    if (modalImg) modalImg.style.display = 'none';
+                } else if (data.modalImage) {
+                    modalImg.src = data.modalImage;
+                    modalImg.alt = data.modalTitle;
+                    modalImg.style.display = 'block';
+                    if (modalVideoContainer) modalVideoContainer.style.display = 'none';
+                }
+
+                modalTitle.textContent = data.modalTitle || '';
+                if(modalDescription) modalDescription.innerHTML = `<p>${data.modalDescription || ''}</p>`;
+                
+                modalDetailsList.innerHTML = '';
+                if (data.modalDetails) {
+                    try {
+                        const details = JSON.parse(data.modalDetails);
+                        for (const key in details) {
+                            if (Object.hasOwnProperty.call(details, key)) {
+                                const value = details[key];
+                                const listItem = document.createElement('li');
+                                listItem.innerHTML = `<strong>${key}:</strong> ${Array.isArray(value) ? value.join(', ') : value}`;
+                                modalDetailsList.appendChild(listItem);
+                            }
+                        }
+                    } catch (e) {
+                        console.error("[Debug] Error parsing modal details JSON:", e);
+                        modalDetailsList.innerHTML = `<li>상세 정보를 불러오는 데 실패했습니다.</li>`;
+                    }
+                }
+                
+                modalOverlay.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            };
+
             const closeModal = () => {
                 console.log("[Debug] Closing portfolio modal.");
                 modalOverlay.classList.remove('active');
                 document.body.style.overflow = '';
                 if (modalIframe && modalIframe.src) {
-                    modalIframe.src = ''; // 비디오 재생 중지
+                    modalIframe.src = ''; // Stop video playback
                 }
             };
-
-            // 이벤트 위임: body에서 발생하는 클릭 이벤트를 감지
+            
+            // Delegated event listener on the document body
             document.body.addEventListener('click', (event) => {
-                const item = event.target.closest('.portfolio-item');
-                if (!item) return;
-
-                event.preventDefault(); // 혹시 모를 기본 동작 방지
-
-                console.log("[Debug] Portfolio item clicked via body listener:", item.dataset.modalTitle);
-                
-                const videoUrl = item.dataset.modalVideo;
-                const imageUrl = item.dataset.modalImage;
-                const title = item.dataset.modalTitle;
-                const description = item.dataset.modalDescription;
-                const detailsString = item.dataset.modalDetails;
-
-                // 비디오 또는 이미지 컨테이너 제어
-                if (videoUrl && modalIframe) {
-                    modalIframe.src = videoUrl;
-                    modalVideoContainer.style.display = 'block';
-                    modalImg.style.display = 'none';
-                } else if (imageUrl) {
-                    modalImg.src = imageUrl;
-                    modalImg.alt = title;
-                    modalImg.style.display = 'block';
-                    if(modalVideoContainer) modalVideoContainer.style.display = 'none';
+                const trigger = event.target.closest('.portfolio-item, .portfolio-modal-trigger');
+                if (trigger) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    openModal(trigger);
                 }
-
-                modalTitle.textContent = title;
-                if(modalDescription) modalDescription.innerHTML = `<p>${description || ''}</p>`;
-
-                // 상세 정보 리스트 생성
-                modalDetailsList.innerHTML = '';
-                if (detailsString) {
-                    try {
-                        const details = JSON.parse(detailsString);
-                        for (const key in details) {
-                            if (details.hasOwnProperty(key)) {
-                                const value = details[key];
-                                const listItem = document.createElement('li');
-                                if (Array.isArray(value)) {
-                                    listItem.innerHTML = `<strong>${key}:</strong> ${value.join(', ')}`;
-                                } else {
-                                    listItem.innerHTML = `<strong>${key}:</strong> ${value}`;
-                                }
-                                modalDetailsList.appendChild(listItem);
-                            }
-                        }
-                    } catch (e) {
-                        console.error("[Debug] Error parsing modal details JSON:", e, "Raw details:", detailsString);
-                        const listItem = document.createElement('li');
-                        listItem.textContent = "상세 정보를 불러오는 데 실패했습니다.";
-                        modalDetailsList.appendChild(listItem);
-                    }
-                }
-
-                modalOverlay.classList.add('active');
-                document.body.style.overflow = 'hidden';
             });
-
-            // 닫기 버튼 리스너
+            
+            // Attach close listeners
             if (closeModalButton) closeModalButton.addEventListener('click', closeModal);
-            // 오버레이 클릭 리스너
             modalOverlay.addEventListener('click', (event) => {
                 if (event.target === modalOverlay) closeModal();
             });
-            // ESC 키 리스너
             document.addEventListener('keydown', (event) => {
                 if (event.key === 'Escape' && modalOverlay.classList.contains('active')) {
                     closeModal();
                 }
             });
 
-            // 리스너가 성공적으로 부착되었음을 표시
             document.body.dataset.portfolioListenersAttached = 'true';
-            console.log("[Debug] Portfolio modal listeners attached successfully to body.");
+            console.log("[Debug] Portfolio modal listeners attached successfully via delegation.");
 
         } catch (e) {
             console.error("[Debug] Error in initializePortfolioModal:", e);
@@ -890,16 +706,28 @@ document.addEventListener('DOMContentLoaded', () => {
             initializeMobileNavigation();
             reinitializeGsapAnimations();
             reinitializeVanillaTilt();
-            initializeFaqAccordion();
-            initializePortfolioModal();
-            initializeImageViewerModal();
-            initializeHeroCtaEffect();
+            
+            // --- Conditional Initializers ---
+            // Only run if the specific elements for these features exist on the current page.
+            if (document.querySelector('.faq-item')) {
+                initializeFaqAccordion();
+            }
+            if (document.getElementById('portfolio-modal')) {
+                initializePortfolioModal();
+            }
+            if (document.getElementById('image-viewer-modal')) {
+                initializeImageViewerModal();
+            }
+            if (document.getElementById('hero-cta')) {
+                initializeHeroCtaEffect();
+            }
+            
             initializeServiceCardIconHover();
             initializeScrollProgressBar();
         } catch(e) {
             console.error("[Debug] Error during initialization sequence:", e);
         }
-        console.log("[Debug] All initializers finished.");
+        console.log('[Debug] All initializers finished.');
     }
 
     // --------------------
@@ -914,50 +742,74 @@ document.addEventListener('DOMContentLoaded', () => {
     if (typeof barba !== 'undefined') {
         console.log('[Barba Debug] Barba.js found, attempting to initialize...');
         try {
+            // Globally track instances that need cleanup
+            window.activeScrollTriggers = [];
+            window.activeTiltInstances = [];
+
+            // --- Cleanup function to be called before leaving a page ---
+            function cleanupPreviousPage() {
+                console.log('[Cleanup] Starting cleanup for previous page...');
+                
+                // Kill GSAP ScrollTriggers
+                if (window.activeScrollTriggers && window.activeScrollTriggers.length) {
+                    console.log(`[Cleanup] Killing ${window.activeScrollTriggers.length} GSAP ScrollTriggers.`);
+                    window.activeScrollTriggers.forEach(st => st.kill());
+                    window.activeScrollTriggers = [];
+                }
+                
+                // Destroy VanillaTilt instances
+                if (window.activeTiltInstances && window.activeTiltInstances.length) {
+                    console.log(`[Cleanup] Destroying ${window.activeTiltInstances.length} VanillaTilt instances.`);
+                    window.activeTiltInstances.forEach(instance => {
+                        if (instance && typeof instance.destroy === 'function') {
+                            instance.destroy();
+                        }
+                    });
+                    window.activeTiltInstances = [];
+                }
+                console.log('[Cleanup] Cleanup complete.');
+            }
+
             barba.init({
                 sync: true, 
-                timeout: 7000, 
-                debug: true, // Enable Barba's own debug mode
-                prevent: ({ el }) => {
-                    // href 속성값이 '#'으로 시작하는 링크는 Barba.js가 처리하지 않도록 방지
-                    const href = el.getAttribute('href');
-                    return href && href.startsWith('#');
-                },
+                timeout: 7000,
+                debug: true,
                 transitions: [{
-                    name: 'slide-transition',
-                    once(data) {
-                        console.log('[Barba Debug] "once" handler called. Data:', data);
-                        runAllInitializers();
-                    },
+                    name: 'default-transition',
+                    
                     async leave(data) {
-                        console.log('[Barba Debug] "leave" handler called. Current container:', data.current.container);
-                        const done = this.async();
-                        gsap.to(data.current.container, {
-                            opacity: 0, y: -80, duration: 0.4, ease: "power2.in", 
-                            onComplete: () => {
-                                console.log('[Barba Debug] "leave" animation complete.');
-                                done();
-                            }
+                        cleanupPreviousPage();
+                        await gsap.to(data.current.container, {
+                            autoAlpha: 0,
+                            duration: 0.4,
+                            ease: 'power2.in'
                         });
                     },
-                    async enter(data) {
-                        console.log('[Barba Debug] "enter" handler called. Next container:', data.next.container);
-                        window.scrollTo(0, 0); 
-                        gsap.set(data.next.container, { opacity: 0, y: 80 });
-                        
-                        gsap.to(data.next.container, {
-                            opacity: 1, y: 0, duration: 0.5, ease: "power2.out", delay: 0.2, 
-                            onComplete: () => {
-                                console.log('[Barba Debug] "enter" animation complete, calling initializers...');
-                                runAllInitializers();
-                            }
+                    
+                    enter(data) {
+                        window.scrollTo(0, 0);
+                        gsap.set(data.next.container, { autoAlpha: 0 });
+                    },
+                    
+                    async afterEnter(data) {
+                        runAllInitializers();
+                        await gsap.to(data.next.container, {
+                            autoAlpha: 1,
+                            duration: 0.5,
+                            ease: 'power2.out'
                         });
+                    },
+                    
+                    once(data) {
+                        runAllInitializers();
                     }
                 }]
             });
             console.log('[Barba Debug] Barba.init called successfully.');
         } catch (e) {
             console.error('[Barba Debug] Error initializing Barba.js:', e);
+            // Fallback for environments where Barba might fail
+            runAllInitializers();
         }
     } else {
         console.warn("[Barba Debug] Barba.js library not loaded. Page transitions disabled. Running initializers directly.");

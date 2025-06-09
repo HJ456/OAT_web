@@ -1,0 +1,170 @@
+<!-- portfolio.html -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>포트폴리오 - OAT</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+  <script src="https://unpkg.com/@barba/core"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body data-barba="wrapper">
+  <div id="scroll-progress-bar"></div>
+  <div id="particles-js"></div>
+  <div id="cursor-dot"></div>
+  <div id="cursor-outline"></div>
+
+  <header>
+    <nav class="container">
+      <a href="index.html" class="logo">OAT</a>
+      <ul class="nav-links">
+        <li><a href="about.html" class="nav-link">회사소개</a></li>
+        <li><a href="solutions.html" class="nav-link">솔루션</a></li>
+        <li><a href="product.html" class="nav-link">제품소개</a></li>
+        <li><a href="portfolio.html" class="nav-link">포트폴리오</a></li>
+        <li><a href="certifications.html" class="nav-link">특허 및 인증</a></li>
+        <li><a href="index.html#downloads" class="nav-link">자료실</a></li>
+        <li><a href="index.html#contact" class="nav-link">문의하기</a></li>
+      </ul>
+      <button class="menu-toggle" id="menu-toggle" aria-label="메뉴 열기/닫기">
+        <i class="fas fa-bars"></i>
+      </button>
+    </nav>
+  </header>
+
+  <main data-barba="container" data-barba-namespace="portfolio">
+    <section class="sub-hero">
+        <div class="container">
+            <h1>Portfolio</h1>
+            <p>OAT의 기술력을 증명하는 다양한 프로젝트들을 만나보세요.</p>
+        </div>
+    </section>
+
+    <section class="content-section page-content">
+      <div class="container">
+        <div class="portfolio-detailed-grid">
+          <!-- Project 1: 기술 소개 영상 -->
+          <div class="portfolio-detailed-item" data-aos="fade-up">
+            <div class="portfolio-detailed-img">
+              <img src="images/portfolio-video-thumb.png" alt="기술 소개 영상 썸네일">
+            </div>
+            <div class="portfolio-detailed-text">
+              <h3 class="sub-section-title">OAT 기술 소개 영상</h3>
+              <p>OAT의 핵심 기술인 BFTC(Battery Fire Target Control)가 어떻게 전기차의 안전을 보장하는지 영상으로 확인해보세요. 실제 테스트 환경에서의 작동 원리와 뛰어난 성능을 직접 보실 수 있습니다.</p>
+              <a href="#" class="cta-button portfolio-modal-trigger" 
+                 data-modal-video="https://www.youtube.com/embed/lxux0yCXs2Q"
+                 data-modal-title="OAT 기술 소개 영상"
+                 data-modal-description="OAT의 핵심 기술인 BFTC가 어떻게 전기차의 안전을 보장하는지 영상으로 확인해보세요..."
+                 data-modal-details='{"Category": "기술 소개", "Running Time": "3:48", "Language": "KOR/ENG"}'>영상 보기</a>
+            </div>
+          </div>
+
+          <!-- Project 2: 주행 중 화재 제어 -->
+          <div class="portfolio-detailed-item" data-aos="fade-up">
+            <div class="portfolio-detailed-img">
+              <img src="images/portfolio1.png" alt="프로젝트 알파">
+            </div>
+            <div class="portfolio-detailed-text">
+              <h3 class="sub-section-title">주행 중 화재 제어 (업로드 예정)</h3>
+              <p>실제 차량 주행 환경에서 OAT의 BFTC 기술이 어떻게 배터리 이상 징후를 감지하고 화재를 초기에 제어하는지 보여주는 실증 테스트 영상입니다. K-City에서의 테스트를 통해 열폭주 발생 후 30초 내에 온도가 안정화되는 과정을 담았습니다.</p>
+              <a href="#" class="cta-button portfolio-modal-trigger" 
+                 data-modal-video="https://www.youtube.com/embed/YOUR_VIDEO_ID_HERE_1"
+                 data-modal-title="주행 중 화재 제어 (업로드 예정)"
+                 data-modal-description="실제 차량 주행 환경에서 OAT의 BFTC 기술이 어떻게 배터리 이상 징후를 감지하고..."
+                 data-modal-details='{"Test Type": "실차 주행 테스트", "Location": "K-City", "Key Moment": "열폭주 발생 후 30초 내 온도 안정화"}'>영상 보기</a>
+            </div>
+          </div>
+          
+          <!-- Project 3: 충전 중 화재 예방 -->
+          <div class="portfolio-detailed-item" data-aos="fade-up">
+            <div class="portfolio-detailed-img">
+              <img src="images/portfolio2.png" alt="자체 테스트 영상">
+            </div>
+            <div class="portfolio-detailed-text">
+              <h3 class="sub-section-title">충전 중 화재 예방 (시연 영상)</h3>
+              <p>갑자기 발생할 수 있는 배터리 과열 및 화재 위험을 OAT의 지능형 배터리 화재 타겟 진압 솔루션이 어떻게 열폭주를 진압하는지 보여주는 기술 시연 영상입니다. 이상 온도 및 압력 감지 후 즉시 진압을 시작하여 최고 온도를 약 350°C 미만으로 제어하는 데 성공했습니다.</p>
+              <a href="#" class="cta-button portfolio-modal-trigger"
+                 data-modal-video="https://www.youtube.com/embed/rpciTAXsXKk"
+                 data-modal-title="충전 중 화재 예방 (시연 영상)"
+                 data-modal-description="갑자기 발생할 수 있는 배터리 과열 및 화재 위험을 OAT의 지능형 배터리 화재 타겟 진압 솔루션이..."
+                 data-modal-details='{"Date": "2025.05.20", "Safety Feature": "이상 온도/압력 감지 및 열폭주 즉시 진압 시작", "Result": "최고 온도 약 350°C 미만으로 제어"}'>영상 보기</a>
+            </div>
+          </div>
+
+          <!-- Project 4: BFTC의 확장성 -->
+          <div class="portfolio-detailed-item" data-aos="fade-up">
+            <div class="portfolio-detailed-img">
+              <img src="images/portfolio3.png" alt="프로젝트 감마">
+            </div>
+            <div class="portfolio-detailed-text">
+              <h3 class="sub-section-title">BFTC의 강점 : 확장성</h3>
+              <p>전기차 뿐만 아니라 선박 및 ESS 등 배터리를 사용하는 다양한 환경에서 운영 효율성과 안전성을 극대화하기 위해 개발된 BFTC 통합 모듈입니다. 설치 및 유지보수가 용이하며, 모듈형 설계로 높은 호환성을 자랑합니다. 이를 통해 다양한 분야에서 유지보수 비용을 30% 절감할 수 있을 것으로 기대됩니다.</p>
+               <a href="#" class="cta-button portfolio-modal-trigger" 
+                 data-modal-image="images/portfolio3-large.png"
+                 data-modal-title="BFTC의 강점 : 확장성"
+                 data-modal-description="전기차 뿐만 아니라 선박 및 ESS 등 배터리를 사용하는 다양한 환경에서..."
+                 data-modal-details='{"적용 분야": "선박, 에너지 저장 장치(ESS)", "핵심 장점": "모듈형 설계로 인한 높은 호환성", "기대 효과": "유지보수 비용 30% 절감"}'>이미지 보기</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-about">
+          <h3 class="footer-logo">OAT</h3>
+          <p>OAT는 전기차 화재로부터 사람과 미래를 지킵니다. 혁신적인 기술력으로 위험을 통제하고, 현실을 바꾸는 솔루션을 제공합니다.</p>
+        </div>
+        <div class="footer-links">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="about.html">회사소개</a></li>
+            <li><a href="solutions.html">솔루션</a></li>
+            <li><a href="product.html">제품소개</a></li>
+            <li><a href="portfolio.html">포트폴리오</a></li>
+          </ul>
+        </div>
+        <div class="footer-contact">
+          <h4>Contact Us</h4>
+          <p><strong>(주)오에이티</strong></p>
+          <p>경기도 평택시 진위면 삼남로 745-34</p>
+          <p>Email: contact@oat-kr.com</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2024 OAT Inc. All Rights Reserved.</p>
+        <div class="family-sites">
+          <a href="https://dongyangplt.co.kr" target="_blank">Dongyang PLT</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Portfolio Modal (메인 페이지와 동일한 구조) -->
+  <div id="portfolio-modal" class="modal-overlay">
+    <div class="modal-content">
+      <button class="modal-close-button" aria-label="닫기"><i class="fas fa-times"></i></button>
+      <div class="modal-video-container">
+        <iframe src="" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+      </div>
+      <img src="" alt="프로젝트 이미지" id="modal-img">
+      <h3 id="modal-title"></h3>
+      <div id="modal-description"></div>
+      <h4>프로젝트 상세 정보:</h4>
+      <ul id="modal-details-list"></ul>
+    </div>
+  </div>
+
+  <script src="js/script.js"></script>
+</body>
+</html> 

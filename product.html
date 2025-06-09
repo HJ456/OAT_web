@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>제품소개 - OAT</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+  <script src="https://unpkg.com/@barba/core"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body data-barba="wrapper">
+  <div id="scroll-progress-bar"></div>
+  <div id="particles-js"></div>
+  <div id="cursor-dot"></div>
+  <div id="cursor-outline"></div>
+
+  <header>
+    <nav class="container">
+      <a href="index.html" class="logo">OAT</a>
+      <ul class="nav-links">
+        <li><a href="about.html" class="nav-link">회사소개</a></li>
+        <li><a href="solutions.html" class="nav-link">솔루션</a></li>
+        <li><a href="product.html" class="nav-link">제품소개</a></li>
+        <li><a href="portfolio.html" class="nav-link">포트폴리오</a></li>
+        <li><a href="certifications.html" class="nav-link">특허 및 인증</a></li>
+        <li><a href="index.html#downloads" class="nav-link">자료실</a></li>
+        <li><a href="index.html#contact" class="nav-link">문의하기</a></li>
+      </ul>
+      <button class="menu-toggle" id="menu-toggle" aria-label="메뉴 열기/닫기">
+        <i class="fas fa-bars"></i>
+      </button>
+    </nav>
+  </header>
+
+  <main data-barba="container" data-barba-namespace="product">
+    <section class="sub-hero">
+        <div class="container">
+            <h1>BFTC System</h1>
+            <p>화재를 원천적으로 차단하는 BFTC 시스템의 구성 요소</p>
+        </div>
+    </section>
+
+    <section class="content-section page-content">
+      <div class="container">
+        <div class="product-intro" data-aos="fade-up">
+          <img src="images/product_exploded_view.png" alt="BFTC 시스템 분해도" style="max-width: 600px; margin: 0 auto 50px; display: block; border-radius: 8px;">
+          <p>OAT의 BFTC 시스템은 모듈화된 설계를 통해 안전성과 유지보수성을 극대화했습니다. 각 구성 요소는 유기적으로 연동하여 최상의 화재 대응 성능을 발휘합니다.</p>
+        </div>
+
+        <div class="product-components-grid">
+          <div class="component-item" data-aos="fade-up">
+            <div class="component-icon"><i class="fas fa-cubes"></i></div>
+            <h3>서브팩 (Sub-pack)</h3>
+            <p>48개 셀 단위로 구성된 모듈화된 배터리 구조로, 특정 서브팩에서 화재 발생 시 다른 팩으로의 열 전이를 원천적으로 차단합니다.</p>
+          </div>
+          <div class="component-item" data-aos="fade-up" data-aos-delay="100">
+            <div class="component-icon"><i class="fas fa-layer-group"></i></div>
+            <h3>열 차단벽</h3>
+            <p>각 셀 단위를 보호하는 특수 열 차단 구조를 적용하여, 화재 발생 시 주변 셀로의 확산을 물리적으로 방지합니다.</p>
+          </div>
+          <div class="component-item" data-aos="fade-up" data-aos-delay="200">
+            <div class="component-icon"><i class="fas fa-wind"></i></div>
+            <h3>가스 배출 시스템</h3>
+            <p>열 폭주 시 발생하는 유독가스를 외부로 안전하게 배출하는 전용 배관 및 활성 밸브가 포함되어 2차 인명 피해를 예방합니다.</p>
+          </div>
+          <div class="component-item" data-aos="fade-up" data-aos-delay="300">
+            <div class="component-icon"><i class="fas fa-microchip"></i></div>
+            <h3>BFTC 컨트롤러</h3>
+            <p>온도/압력 센서, BMS와 연동하여 시스템 전체를 제어하는 핵심 두뇌 역할을 수행합니다.</p>
+          </div>
+          <div class="component-item" data-aos="fade-up" data-aos-delay="400">
+            <div class="component-icon"><i class="fas fa-tint"></i></div>
+            <h3>냉각수 전환 공급 장치</h3>
+            <p>기존 차량의 냉각수 라인을 활용하여, 화재가 발생한 특정 서브팩에 정밀하게 냉각수를 집중 분사합니다.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-about">
+          <h3 class="footer-logo">OAT</h3>
+          <p>OAT는 전기차 화재로부터 사람과 미래를 지킵니다. 혁신적인 기술력으로 위험을 통제하고, 현실을 바꾸는 솔루션을 제공합니다.</p>
+        </div>
+        <div class="footer-links">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="about.html">회사소개</a></li>
+            <li><a href="solutions.html">솔루션</a></li>
+            <li><a href="product.html">제품소개</a></li>
+            <li><a href="portfolio.html">포트폴리오</a></li>
+          </ul>
+        </div>
+        <div class="footer-contact">
+          <h4>Contact Us</h4>
+          <p><strong>(주)오에이티</strong></p>
+          <p>경기도 평택시 진위면 삼남로 745-34</p>
+          <p>Email: contact@oat-kr.com</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2024 OAT Inc. All Rights Reserved.</p>
+        <div class="family-sites">
+          <a href="https://dongyangplt.co.kr" target="_blank">Dongyang PLT</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html> 

@@ -1,0 +1,179 @@
+<!-- solutions.html -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>솔루션 - OAT</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+  <script src="https://unpkg.com/@barba/core"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body data-barba="wrapper">
+  <div id="scroll-progress-bar"></div>
+  <div id="particles-js"></div>
+  <div id="cursor-dot"></div>
+  <div id="cursor-outline"></div>
+
+  <header>
+    <nav class="container">
+      <a href="index.html" class="logo">OAT</a>
+      <ul class="nav-links">
+        <li><a href="about.html" class="nav-link">회사소개</a></li>
+        <li><a href="solutions.html" class="nav-link">솔루션</a></li>
+        <li><a href="product.html" class="nav-link">제품소개</a></li>
+        <li><a href="portfolio.html" class="nav-link">포트폴리오</a></li>
+        <li><a href="certifications.html" class="nav-link">특허 및 인증</a></li>
+        <li><a href="index.html#downloads" class="nav-link">자료실</a></li>
+        <li><a href="index.html#contact" class="nav-link">문의하기</a></li>
+      </ul>
+      <button class="menu-toggle" id="menu-toggle" aria-label="메뉴 열기/닫기">
+        <i class="fas fa-bars"></i>
+      </button>
+    </nav>
+  </header>
+
+  <main data-barba="container" data-barba-namespace="solutions">
+    <section class="sub-hero">
+        <div class="container">
+            <h1>Our Solutions</h1>
+            <p>OAT의 핵심 기술, BFTC가 제공하는 안전의 새로운 기준</p>
+        </div>
+    </section>
+
+    <section class="content-section page-content">
+      <div class="container">
+        <div class="solution-detailed-content">
+          
+          <div class="solution-intro" data-aos="fade-up">
+            <h2 class="sub-section-title">BFTC: 차세대 배터리 화재 제어 기술</h2>
+            <p>BFTC(Battery Fire Target Control)는 단순한 소화 시스템을 넘어, 배터리 상태를 실시간으로 감지하고 이상 징후 발생 시 열폭주를 사전에 차단하는 지능형 안전 솔루션입니다. OAT의 독자적인 기술로 전기차 화재의 패러다임을 바꿉니다.</p>
+          </div>
+
+          <div class="solution-section" data-aos="fade-up">
+            <h2 class="sub-section-title">개발 배경</h2>
+            <p>증가하는 전기차 화재에 대한 소비자 불안감과 현재 외부 주입식 진화 방식의 한계를 극복하기 위해 BFTC 기술을 개발했습니다. UN GTR No.20 등 국제적으로 강화되는 배터리 안전 기준에 부합하는 근본적인 해결책이 필요합니다.</p>
+          </div>
+
+          <div class="solution-section" data-aos="fade-up">
+            <h2 class="sub-section-title">BFTC 작동 원리</h2>
+            <ol class="working-principle-list">
+              <li>
+                <div class="principle-icon"><i class="fas fa-fire-alt"></i></div>
+                <div><strong>화재 감지:</strong> 배터리 서브팩 내부의 온도/압력 센서가 열 폭주 초기 단계를 신속하게 감지합니다.</div>
+              </li>
+              <li>
+                <div class="principle-icon"><i class="fas fa-wind"></i></div>
+                <div><strong>가스 배출:</strong> 유독 가스 발생 시, 활성 밸브를 통해 외부로 안전하게 배출합니다.</div>
+              </li>
+              <li>
+                <div class="principle-icon"><i class="fas fa-crosshairs"></i></div>
+                <div><strong>정밀 진압:</strong> BFTC 컨트롤러가 화재가 발생한 서브팩을 특정하여 기존 배터리 냉각수를 해당 위치에 집중적으로 분사합니다.</div>
+              </li>
+              <li>
+                <div class="principle-icon"><i class="fas fa-power-off"></i></div>
+                <div><strong>전원 차단 및 제어:</strong> BMS와 연동하여 화재가 발생한 서브팩의 전원을 개별적으로 차단하고, 전체 시스템을 안정적으로 제어합니다.</div>
+              </li>
+            </ol>
+          </div>
+
+          <div class="solution-section" data-aos="fade-up">
+            <h2 class="sub-section-title">핵심 기술 및 차별점</h2>
+            <table class="comparison-table">
+              <thead>
+                <tr>
+                  <th>구분</th>
+                  <th>기존 기술</th>
+                  <th>BFTC 기술</th>
+                  <th>기대 효과</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>진압 방식</td>
+                  <td>BMS 전원 차단 / 외부 소방</td>
+                  <td>서브팩 단위 정밀 타겟팅 및 냉각수 직접 분사</td>
+                  <td>화재 확산 방지, 인명/재산 피해 최소화</td>
+                </tr>
+                <tr>
+                  <td>진압 시간</td>
+                  <td>열 폭주 시 전소</td>
+                  <td>12분 내 완전 진압</td>
+                  <td>골든타임 확보 및 피해 최소화</td>
+                </tr>
+                <tr>
+                  <td>유독가스</td>
+                  <td>외부 유출 위험</td>
+                  <td>가스 배출 및 필터링 시스템</td>
+                  <td>2차 인명 피해 방지</td>
+                </tr>
+                <tr>
+                  <td>구조</td>
+                  <td>일체형 배터리팩</td>
+                  <td>모듈화된 서브팩 구조</td>
+                  <td>화재 확산 방지 및 유지보수 용이</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="solution-section" data-aos="fade-up">
+            <h2 class="sub-section-title">기술 검증 (Validation & Test)</h2>
+            <h4>공인 시험 결과 - 방재시험연구원(FILK)</h4>
+            <p>BFTC 기술의 성능과 안전성을 공식적으로 입증받았습니다. (2025.02.25)</p>
+            <ul class="test-results-list">
+              <li><strong>열 폭주 제어 시간:</strong> 9분 32초 (요구조건 10분 내)</li>
+              <li><strong>냉각 소화 시간:</strong> 11분 48초 (요구조건 12분 내)</li>
+              <li><strong>재발화 여부:</strong> 없음</li>
+              <li><strong>열 전파:</strong> 발생하지 않음</li>
+            </ul>
+
+            <h4 style="margin-top: 30px;">자체 테스트 및 개발 과정</h4>
+            <p>BMW i3, 아이오닉5 등 실제 전기차를 활용한 15차례 이상의 자체 소화 시험을 통해 기술의 완성도를 높였으며, 충북TP 배터리 검증센터 등 유관 기관과의 협력을 통해 기술을 고도화하고 있습니다.</p>
+          </div>
+          
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-about">
+          <h3 class="footer-logo">OAT</h3>
+          <p>OAT는 전기차 화재로부터 사람과 미래를 지킵니다. 혁신적인 기술력으로 위험을 통제하고, 현실을 바꾸는 솔루션을 제공합니다.</p>
+        </div>
+        <div class="footer-links">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="about.html">회사소개</a></li>
+            <li><a href="solutions.html">솔루션</a></li>
+            <li><a href="product.html">제품소개</a></li>
+            <li><a href="portfolio.html">포트폴리오</a></li>
+          </ul>
+        </div>
+        <div class="footer-contact">
+          <h4>Contact Us</h4>
+          <p><strong>(주)오에이티</strong></p>
+          <p>경기도 평택시 진위면 삼남로 745-34</p>
+          <p>Email: contact@oat-kr.com</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2024 OAT Inc. All Rights Reserved.</p>
+        <div class="family-sites">
+          <a href="https://dongyangplt.co.kr" target="_blank">Dongyang PLT</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html> 

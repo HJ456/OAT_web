@@ -1,0 +1,164 @@
+<!-- about.html -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About OAT - OAT</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+  <script src="https://unpkg.com/@barba/core"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body data-barba="wrapper">
+  <div id="scroll-progress-bar"></div>
+  <div id="particles-js"></div>
+  <div id="cursor-dot"></div>
+  <div id="cursor-outline"></div>
+
+  <header>
+    <nav class="container">
+      <a href="index.html" class="logo">OAT</a>
+      <ul class="nav-links">
+        <li><a href="about.html" class="nav-link">회사소개</a></li>
+        <li><a href="solutions.html" class="nav-link">솔루션</a></li>
+        <li><a href="product.html" class="nav-link">제품소개</a></li>
+        <li><a href="portfolio.html" class="nav-link">포트폴리오</a></li>
+        <li><a href="certifications.html" class="nav-link">특허 및 인증</a></li>
+        <li><a href="index.html#downloads" class="nav-link">자료실</a></li>
+        <li><a href="index.html#contact" class="nav-link">문의하기</a></li>
+      </ul>
+      <button class="menu-toggle" id="menu-toggle" aria-label="메뉴 열기/닫기">
+        <i class="fas fa-bars"></i>
+      </button>
+    </nav>
+  </header>
+
+  <main data-barba="container" data-barba-namespace="about">
+    <section class="sub-hero">
+        <div class="container">
+            <h1>회사소개</h1>
+            <p>OAT는 전기차의 안전을 넘어, 모빌리티의 미래를 만듭니다.</p>
+        </div>
+    </section>
+
+    <section class="content-section page-content">
+      <div class="container">
+        <div class="about-detailed-content">
+
+          <div class="ceo-message-section" data-aos="fade-up">
+            <h2 class="sub-section-title">CEO 메시지</h2>
+            <div class="ceo-message-content">
+                <div class="ceo-photo">
+                    <img src="images/ceo_placeholder.png" alt="전성도 대표">
+                </div>
+                <div class="ceo-text">
+                    <blockquote>
+                        <p>"2003년 자동차 부품 제조사 설립 이후 자동차 부품 분야에서 끊임없는 기술 혁신을 추구해왔습니다. 전기차 시대의 가장 큰 과제인 배터리 안전 문제에 대한 근본적인 해결책을 제시하고자 BFTC 기술을 개발하게 되었습니다. 고객의 안전을 최우선으로 생각하며, 더 나아가 글로벌 전기차 시장의 기술 표준을 선도하는 기업이 되겠습니다."</p>
+                    </blockquote>
+                    <div class="ceo-signature">
+                        <span class="name">전성도</span>
+                        <span class="title">(주)오에이티 대표</span>
+                    </div>
+                </div>
+            </div>
+          </div>
+
+          <div class="company-overview" data-aos="fade-up">
+            <h2 class="sub-section-title">회사 개요</h2>
+            <div class="overview-grid">
+              <div class="overview-item"><strong>회사명</strong><span>오에이티㈜</span></div>
+              <div class="overview-item"><strong>대표</strong><span>전성도</span></div>
+              <div class="overview-item"><strong>설립일</strong><span>2024년 12월</span></div>
+              <div class="overview-item"><strong>주요 사업</strong><span>자동차 내장재, NVH 부품 및 전기차 배터리 화재 진압 기술</span></div>
+              <div class="overview-item"><strong>주요 고객사</strong><span>현대자동차, 기아, 현대모비스, Lucid, Rivian 등</span></div>
+              <div class="overview-item"><strong>품질 인증</strong><span>SQ-MARK, IATF16949, ISO 14001, ISO45001</span></div>
+            </div>
+          </div>
+
+          <div class="about-mission" data-aos="fade-up">
+            <h2 class="sub-section-title">우리의 미션</h2>
+            <p>OAT는 전기차 화재로부터 사람과 미래를 지킵니다. 혁신적인 기술력으로 위험을 통제하고, 현실을 바꾸는 솔루션을 제공하여 모든 사람이 안심하고 전기차를 이용할 수 있는 세상을 만드는 것을 목표로 합니다.</p>
+          </div>
+
+          <div class="about-vision" data-aos="fade-up" data-aos-delay="100">
+            <h2 class="sub-section-title">우리의 비전</h2>
+            <p>'불가능'을 가능하게 만드는 기술, 우리는 열폭주를 멈추는 새로운 기준을 만들고, 글로벌 모빌리티 산업의 변화를 주도합니다. 지속적인 연구 개발을 통해 안전 기술의 패러다임을 전환하고, 인류의 더 나은 내일에 기여합니다.</p>
+          </div>
+
+          <div class="core-values" data-aos="fade-up" data-aos-delay="200">
+            <h2 class="sub-section-title">핵심 가치</h2>
+            <div class="values-grid">
+              <div class="value-item">
+                <i class="fas fa-lightbulb"></i>
+                <h3>혁신</h3>
+                <p>기존의 틀을 깨는 창의적인 아이디어로 기술의 한계를 넘어섭니다.</p>
+              </div>
+              <div class="value-item">
+                <i class="fas fa-shield-alt"></i>
+                <h3>안전</h3>
+                <p>인명을 최우선으로, 타협하지 않는 안전 기준을 모든 제품에 적용합니다.</p>
+              </div>
+              <div class="value-item">
+                <i class="fas fa-handshake"></i>
+                <h3>신뢰</h3>
+                <p>투명성과 정직함을 바탕으로 고객 및 파트너와 함께 성장합니다.</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="history-timeline" data-aos="fade-up" data-aos-delay="300">
+            <h2 class="sub-section-title">연혁</h2>
+            <ul>
+              <li><strong>2003.01</strong> - 동양피엘티㈜ 설립</li>
+              <li><strong>2023.10</strong> - BFTC 기술 콘셉트 설계 시작</li>
+              <li><strong>2024</strong> - OAT 설립, BFTC 기술 특허 출원</li>
+              <li><strong>2025 (예정)</strong> - 프로토타입 공개 및 공인 인증 완료</li>
+              <li><strong>2026 (예정)</strong> - 글로벌 자동차 제조사와 파트너십 체결</li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-about">
+          <h3 class="footer-logo">OAT</h3>
+          <p>OAT는 전기차 화재로부터 사람과 미래를 지킵니다. 혁신적인 기술력으로 위험을 통제하고, 현실을 바꾸는 솔루션을 제공합니다.</p>
+        </div>
+        <div class="footer-links">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="about.html">회사소개</a></li>
+            <li><a href="solutions.html">솔루션</a></li>
+            <li><a href="product.html">제품소개</a></li>
+            <li><a href="portfolio.html">포트폴리오</a></li>
+          </ul>
+        </div>
+        <div class="footer-contact">
+          <h4>Contact Us</h4>
+          <p><strong>(주)오에이티</strong></p>
+          <p>경기도 평택시 진위면 삼남로 745-34</p>
+          <p>Email: contact@oat-kr.com</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2024 OAT Inc. All Rights Reserved.</p>
+        <div class="family-sites">
+          <a href="https://dongyangplt.co.kr" target="_blank">Dongyang PLT</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html> 
