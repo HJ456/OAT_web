@@ -12,10 +12,10 @@
 :root {
     --bg-dark-primary: #FFFFFF;
     --bg-dark-secondary: ##F8F9FA;
-    --text-light-primary: #212529;
-    --text-light-secondary: #6C757D;
-    --text-dark: #007BFF;
-    --accent-cyan: #007BFF;
+    --text-light-primary: #CCD6F6;
+    --text-light-secondary: #A8B2D1;
+    --text-dark: #1d1d1f;
+    --accent-cyan: #64FFDA;
     --accent-blue: #3B82F6;
     --accent-light-blue: #7DD3FC; /* 추가된 밝은 파랑 */
     --light-navy: #112240; /* 카드 배경 등 */
